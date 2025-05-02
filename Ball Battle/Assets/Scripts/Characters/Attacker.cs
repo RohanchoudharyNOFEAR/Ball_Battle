@@ -15,7 +15,7 @@ public class Attacker : Soldier
     public override void Start()
     {
         base.Start();
-       // ball = GameObject.FindObjectOfType<BallManager>().GetBall();
+        ball = GameObject.FindObjectOfType<BallManager>().GetBall();
     }
 
     public override ISoldierState GetInitialActiveState()

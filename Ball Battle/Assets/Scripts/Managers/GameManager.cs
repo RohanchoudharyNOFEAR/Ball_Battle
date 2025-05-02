@@ -31,4 +31,10 @@ public class GameManager : MonoBehaviour
     {
 
     }
+
+    public void OnGoalScored(bool playerScored)
+    {
+        Debug.Log(playerScored ? "PLAYER SCORED!" : "ENEMY SCORED!");
+       // EndMatch(); // Or handle win tracking
+    }
 }
