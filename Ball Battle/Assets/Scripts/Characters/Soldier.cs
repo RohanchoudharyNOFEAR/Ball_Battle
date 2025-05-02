@@ -6,6 +6,7 @@ public abstract class Soldier : MonoBehaviour
 {
     protected ISoldierState currentState;
 
+    public ISoldierState GetCurrentState {  get { return currentState; } }
     public float spawnDelay = 0.5f;
     public float reactivateTime = 2.5f;
     public Renderer rend;
