@@ -20,9 +20,10 @@ public abstract class Soldier : MonoBehaviour
 
     public virtual void Start()
     {
-        rend = GetComponent<Renderer>();
+        rend = GetComponentInChildren<Renderer>();
         originalColor = rend.material.color;
-        anim = GetComponent<Animator>();
+       
+        anim = GetComponentInChildren<Animator>();
         TransitionToState(new InactiveState(spawnDelay));
     }
 
