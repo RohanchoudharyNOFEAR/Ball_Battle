@@ -29,7 +29,8 @@ public class Attacker : Soldier
         if (highlight) highlight.SetActive(true);
         ball.transform.SetParent(transform);
         ball.transform.localPosition = Vector3.forward;
-        anim?.SetBool("HasBall", true);
+        //anim?.SetBool("Run", false);
+       // anim?.SetBool("Dribble", true);
     }
 
     public void DropBall()
@@ -37,7 +38,8 @@ public class Attacker : Soldier
         hasBall = false;
         if (highlight) highlight.SetActive(false);
         ball.transform.SetParent(null);
-        anim?.SetBool("HasBall", false);
+        anim?.SetBool("Dribble", false);
+       // anim?.SetBool("HasBall", false);
         TransitionToState(new InactiveState(2.5f));
     }
 }

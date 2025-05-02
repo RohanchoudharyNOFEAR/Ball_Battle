@@ -28,7 +28,7 @@ public class BallManager : MonoBehaviour
 
         return new Vector3(
             Random.Range(center.x - size.x / 2, center.x + size.x / 2),
-            0.5f,
+            1.7f,
             Random.Range(center.z - size.z / 2, center.z + size.z / 2)
         );
     }

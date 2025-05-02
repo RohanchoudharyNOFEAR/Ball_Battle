@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static SoldierSpawner;
@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private float matchTimer;
 
     public SoldierSpawner soldierSpawner;
+    public BallManager ballManager;
     public bool isRushTime = false;
 
     private void Awake()
@@ -63,6 +64,10 @@ public class GameManager : MonoBehaviour
         currentTurn = turn;
         matchTimer = matchDuration;
         soldierSpawner.SetTurn(turn == Turn.PlayerAttack ? SoldierSpawner.TurnType.Attacker : SoldierSpawner.TurnType.Defender);
+
+        // Ball spawn logic
+        bool playerAttacking = (turn == Turn.PlayerAttack);
+        ballManager.SpawnBall(playerAttacking);
     }
 
    

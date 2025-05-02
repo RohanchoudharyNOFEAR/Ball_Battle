@@ -48,7 +48,7 @@ public class SoldierSpawner : MonoBehaviour
 
     void SpawnSoldier(GameObject prefab, Vector3 spawnPosition)
     {
-        Vector3 adjustedPosition = new Vector3(spawnPosition.x, 2.5f, spawnPosition.z); // adjust height as needed
+        Vector3 adjustedPosition = new Vector3(spawnPosition.x, 1.5f, spawnPosition.z); // adjust height as needed
         Instantiate(prefab, adjustedPosition, Quaternion.identity);
     }
 

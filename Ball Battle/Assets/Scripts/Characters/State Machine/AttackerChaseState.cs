@@ -8,6 +8,7 @@ public class AttackerChaseState : ISoldierState
     {
         s.SetColor(true);
         s.PlayEffect(s.activationEffect);
+        s.anim?.SetBool("Run", true);
     }
 
     public void Update(Soldier s)
@@ -15,6 +16,9 @@ public class AttackerChaseState : ISoldierState
         var a = s as Attacker;
         if (a.hasBall)
         {
+            s.anim?.SetBool("Run", false);
+            s.anim?.SetBool("Dribble", true);
+           // s.anim?.SetBool("Run", false);
             float moveSpeed =  GameManager.Instance.isRushTime ? a.chaseSpeed : a.carrySpeed;
             a.transform.position += a.transform.forward * moveSpeed * Time.deltaTime;
         }
