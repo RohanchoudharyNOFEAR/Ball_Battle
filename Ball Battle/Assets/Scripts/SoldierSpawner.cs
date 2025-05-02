@@ -51,4 +51,9 @@ public class SoldierSpawner : MonoBehaviour
         Vector3 adjustedPosition = new Vector3(spawnPosition.x, 2.5f, spawnPosition.z); // adjust height as needed
         Instantiate(prefab, adjustedPosition, Quaternion.identity);
     }
+
+    public void SetTurn(TurnType newTurn)
+    {
+        currentTurn = newTurn;
+    }
 }
