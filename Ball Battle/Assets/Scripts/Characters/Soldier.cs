@@ -23,7 +23,7 @@ public abstract class Soldier : MonoBehaviour
         rend = GetComponentInChildren<Renderer>();
         originalColor = rend.material.color;
        
-        anim = GetComponentInChildren<Animator>();
+        anim = GetComponent<Animator>();
         TransitionToState(new InactiveState(spawnDelay));
     }
 

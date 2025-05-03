@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 878855004275471499}
   - component: {fileID: 683536408458338120}
+  - component: {fileID: 537771731417736075}
+  - component: {fileID: 3725923100146543060}
   m_Layer: 0
   m_Name: Defender
   m_TagString: Untagged
@@ -58,6 +60,50 @@ MonoBehaviour:
   chaseSpeed: 1
   returnSpeed: 2
   startPos: {x: 0, y: 0, z: 0}
+--- !u!136 &537771731417736075
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2724607628574762652}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.97, z: 0}
+--- !u!95 &3725923100146543060
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2724607628574762652}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 2d3d15990485ffb4a9235520b2a6bb17, type: 3}
+  m_Controller: {fileID: 9100000, guid: fa7f14734af5e41489e2c374cc328e98, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1892636934746503955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -123,6 +169,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 2d3d15990485ffb4a9235520b2a6bb17,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 2d3d15990485ffb4a9235520b2a6bb17,
+        type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: fa7f14734af5e41489e2c374cc328e98, type: 2}
@@ -163,7 +214,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2

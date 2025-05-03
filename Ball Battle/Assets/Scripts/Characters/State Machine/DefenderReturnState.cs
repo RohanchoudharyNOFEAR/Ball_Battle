@@ -7,7 +7,7 @@ public class DefenderReturnState : ISoldierState
     public void Enter(Soldier s)
     {
         s.SetColor(false);
-        s.anim?.SetTrigger("Reactivate");
+       // s.anim?.SetTrigger("Reactivate");
     }
 
     public void Update(Soldier s)

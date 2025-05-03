@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     public BallManager ballManager;
     public bool isRushTime = false;
 
+    public float GetRemainingTime() => matchTimer;
+    public string GetCurrentTurnText() => currentTurn == Turn.PlayerAttack ? "Attacking" : "Defending";
+
     private void Awake()
     {
         if (Instance == null)
@@ -83,4 +86,6 @@ public class GameManager : MonoBehaviour
     {
         EnergySystem.Instance.SetRushTime(true);
     }
+
+   
 }

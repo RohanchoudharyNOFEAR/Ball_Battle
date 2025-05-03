@@ -15,7 +15,7 @@ public class DefenderChaseState : ISoldierState
     {
         s.SetColor(true);
         s.PlayEffect(s.activationEffect);
-        s.anim?.SetBool("Chasing", true);
+        s.anim?.SetBool("Run", true);
     }
 
     public void Update(Soldier s)
@@ -23,16 +23,16 @@ public class DefenderChaseState : ISoldierState
         var d = s as Defender;
         Vector3 dir = (target.transform.position - d.transform.position).normalized;
         d.transform.position += dir * d.chaseSpeed * Time.deltaTime;
-
-        if (Vector3.Distance(d.transform.position, target.transform.position) < 0.5f)
+        if (Vector3.Distance(d.transform.position, target.transform.position) < 1.5f)
         {
-            target.DropBall();
+            
+            target.PassBallTo();
             d.TransitionToState(new DefenderReturnState());
         }
     }
 
     public void Exit(Soldier s)
     {
-        s.anim?.SetBool("Chasing", false);
+        s.anim?.SetBool("Run", false);
     }
 }

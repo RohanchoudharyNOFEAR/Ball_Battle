@@ -10,6 +10,7 @@ public class EnergySystem : MonoBehaviour
     public float maxEnergy = 6f;
     public float regenRate = 0.5f;
 
+    public float GetNormalizedEnergy() => energy / maxEnergy;
     void Awake() => Instance = this;
 
     void Update()

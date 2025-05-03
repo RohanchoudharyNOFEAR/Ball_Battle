@@ -22,6 +22,7 @@ public class DefenderIdleState : ISoldierState
                 float dist = Vector3.Distance(d.transform.position, atk.transform.position);
                 if (dist <= d.detectionRange)
                 {
+                   
                     d.TransitionToState(new DefenderChaseState(atk));
                     return;
                 }
