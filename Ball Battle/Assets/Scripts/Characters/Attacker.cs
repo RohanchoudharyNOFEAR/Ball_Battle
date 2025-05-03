@@ -81,10 +81,12 @@ public class Attacker : Soldier
 
         if (!hasBall || bestTarget == null) return;
 
+        DropBall();
+
         hasBall = false;
       //  highlight?.SetActive(false);
-        ball.transform.SetParent(null);
-        anim?.SetBool("Dribble", false);
+      //  ball.transform.SetParent(null);
+     //   anim?.SetBool("Dribble", false);
 
         StartCoroutine(SmoothPass(bestTarget));
     }

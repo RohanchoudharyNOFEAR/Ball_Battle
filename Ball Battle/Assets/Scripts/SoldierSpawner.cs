@@ -43,6 +43,20 @@ public class SoldierSpawner : MonoBehaviour
                     SpawnSoldier(defenderPrefab, hit.point);
                 }
             }
+            else if (currentTurn == TurnType.Attacker && tag == "EnemyField")
+            {
+                if (energySystem.TryUseEnergy(3))
+                {
+                    SpawnSoldier(defenderPrefab, hit.point);
+                }
+            }
+            else if (currentTurn == TurnType.Defender && tag == "EnemyField")
+            {
+                if (energySystem.TryUseEnergy(3))
+                {
+                    SpawnSoldier(attackerPrefab, hit.point);
+                }
+            }
         }
     }
 
