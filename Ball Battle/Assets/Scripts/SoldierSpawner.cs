@@ -52,7 +52,7 @@ public class SoldierSpawner : MonoBehaviour
             }
             else if (currentTurn == TurnType.Defender && tag == "EnemyField")
             {
-                if (energySystem.TryUseEnergy(3))
+                if (energySystem.TryUseEnergy(2))
                 {
                     SpawnSoldier(attackerPrefab, hit.point);
                 }

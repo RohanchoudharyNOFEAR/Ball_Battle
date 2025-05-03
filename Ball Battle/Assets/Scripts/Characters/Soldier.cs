@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public abstract class Soldier : MonoBehaviour
 {
@@ -21,8 +22,10 @@ public abstract class Soldier : MonoBehaviour
     protected GameManager gameManager;
     public virtual void Start()
     {
-        rend = GetComponentInChildren<Renderer>();
+     //   rend = GetComponentInChildren<Renderer>();
         originalColor = rend.material.color;
+
+        
        
         anim = GetComponent<Animator>();
         TransitionToState(new InactiveState(spawnDelay));

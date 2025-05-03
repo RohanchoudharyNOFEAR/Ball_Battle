@@ -17,6 +17,13 @@ public class Attacker : Soldier
     public override void Start()
     {
         base.Start();
+
+        if (gameManager.currentTurn == GameManager.Turn.PlayerDefense)
+        {
+            originalColor = Color.black;
+            rend.material.color = originalColor;
+        }
+
         ball = GameObject.FindObjectOfType<BallManager>().GetBall();
 
         GameObject goalObj = GameObject.FindGameObjectWithTag("EnemyGate");

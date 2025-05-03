@@ -12,6 +12,13 @@ public class Defender : Soldier
     public override void Start()
     {
         base.Start();
+
+        if (gameManager.currentTurn == GameManager.Turn.PlayerAttack)
+        {
+            originalColor = Color.black;
+            rend.material.color = originalColor;
+        }
+
         startPos = transform.position;
     }
 

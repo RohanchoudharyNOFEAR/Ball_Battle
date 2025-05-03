@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.25, z: -4.67}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1920851829917787140}
   m_Father: {fileID: 0}
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDelay: 0.5
   reactivateTime: 2.5
-  rend: {fileID: 0}
+  rend: {fileID: 5573777204188742249}
   originalColor: {r: 0, g: 0, b: 0, a: 0}
   inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   reactivateEffect: {fileID: 0}
@@ -221,6 +221,12 @@ PrefabInstance:
 --- !u!4 &1920851829917787140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2d3d15990485ffb4a9235520b2a6bb17,
+    type: 3}
+  m_PrefabInstance: {fileID: 2099387653200135151}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5573777204188742249 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5798539708581724550, guid: 2d3d15990485ffb4a9235520b2a6bb17,
     type: 3}
   m_PrefabInstance: {fileID: 2099387653200135151}
   m_PrefabAsset: {fileID: 0}
