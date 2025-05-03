@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static SoldierSpawner;
 
 public class GameManager : MonoBehaviour
@@ -81,7 +82,8 @@ public class GameManager : MonoBehaviour
             else
             {
                 resultScreen.ShowResult("Draw!");
-                resultScreen.ShowButtons(true);
+                SceneManager.LoadScene("PenaltyGameScene"); // Name of your game scene
+              
             }
 
             StopCoroutine(EndMatch());
