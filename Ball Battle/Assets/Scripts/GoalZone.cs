@@ -5,17 +5,22 @@ using UnityEngine;
 public class GoalZone : MonoBehaviour
 {
     public bool isEnemyGoal; // true = enemy gate = player wins if reached
-
+    public GameObject ParticleEffect;
+  
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Attacker"))
         {
+
+
             Attacker atk = other.GetComponent<Attacker>();
             if (atk != null && atk.hasBall)
             {
                 if (GameManager.Instance != null)
                 {
                     GameManager.Instance.OnGoalScored(isEnemyGoal);
+                    VFXManager.Instance.PlayEffect(ParticleEffect, transform.position,3);
+                    VFXManager.Instance.PlayEffect(ParticleEffect, transform.position *-0.5f, 3);
                 }
 
             }
@@ -29,6 +34,8 @@ public class GoalZone : MonoBehaviour
                 if (atk_mz.HasBall)
                 {
                     gameManager_Maze.PlayerWin();
+                    VFXManager.Instance.PlayEffect(ParticleEffect, transform.position, 3);
+                    VFXManager.Instance.PlayEffect(ParticleEffect, transform.position*-0.5f, 3);
                 }
             }
         }
