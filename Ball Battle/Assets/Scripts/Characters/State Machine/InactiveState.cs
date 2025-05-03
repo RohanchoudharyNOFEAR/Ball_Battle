@@ -15,7 +15,7 @@ public class InactiveState : ISoldierState
     public void Enter(Soldier soldier)
     {
         soldier.SetColor(false);
-        //soldier.anim?.SetTrigger("Reactivate");
+        soldier.anim?.SetBool("Run",false);
         timer = delay;
     }
 

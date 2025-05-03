@@ -13,7 +13,23 @@ public class GoalZone : MonoBehaviour
             Attacker atk = other.GetComponent<Attacker>();
             if (atk != null && atk.hasBall)
             {
-                GameManager.Instance.OnGoalScored(isEnemyGoal);
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.OnGoalScored(isEnemyGoal);
+                }
+
+            }
+
+            GameManager_Maze gameManager_Maze = GameObject.FindObjectOfType<GameManager_Maze>();
+            
+            if (gameManager_Maze)
+            {
+               
+                Atacker_Maze atk_mz = other.GetComponent<Atacker_Maze>();
+                if (atk_mz.HasBall)
+                {
+                    gameManager_Maze.PlayerWin();
+                }
             }
         }
     }
