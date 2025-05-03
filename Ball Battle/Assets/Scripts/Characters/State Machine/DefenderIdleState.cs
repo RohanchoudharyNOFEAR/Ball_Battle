@@ -8,6 +8,8 @@ public class DefenderIdleState : ISoldierState
     {
         s.SetColor(true);
         s.PlayEffect(s.activationEffect);
+        var d = s as Defender;
+        d.defendCircleHighLight.SetActive(true);
     }
 
     public void Update(Soldier s)
@@ -30,5 +32,5 @@ public class DefenderIdleState : ISoldierState
         }
     }
 
-    public void Exit(Soldier s) { }
+    public void Exit(Soldier s) { var d = s as Defender; d.defendCircleHighLight.SetActive(false); }
 }

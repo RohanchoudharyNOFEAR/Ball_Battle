@@ -8,7 +8,7 @@ public class Defender : Soldier
     public float chaseSpeed = 1f;
     public float returnSpeed = 2f;
     public Vector3 startPos;
-
+    public GameObject defendCircleHighLight;
     public override void Start()
     {
         base.Start();

@@ -57,7 +57,8 @@ public class Attacker : Soldier
         if (highlight) highlight.SetActive(false);
         ball.transform.SetParent(null);
         anim?.SetBool("Dribble", false);
-       // anim?.SetBool("HasBall", false);
+        anim?.SetTrigger("Pass");
+        // anim?.SetBool("HasBall", false);
         TransitionToState(new InactiveState(2.5f));
     }
 
@@ -97,6 +98,7 @@ public class Attacker : Soldier
             return;
         }
 
+        transform.LookAt(bestTarget.gameObject.transform);
         DropBall();
 
         hasBall = false;

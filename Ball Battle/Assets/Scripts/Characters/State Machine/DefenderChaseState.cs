@@ -25,7 +25,8 @@ public class DefenderChaseState : ISoldierState
         d.transform.position += dir * d.chaseSpeed * Time.deltaTime;
         if (Vector3.Distance(d.transform.position, target.transform.position) < 3.5f)
         {
-            
+            d.transform.LookAt(target.transform.position);
+            s.anim?.SetTrigger("Touch");
             target.PassBallTo();
             d.TransitionToState(new DefenderReturnState());
         }
