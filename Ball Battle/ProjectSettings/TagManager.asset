@@ -9,6 +9,7 @@ TagManager:
   - Attacker
   - EnemyGate
   - Fence
+  - PlayerGate
   layers:
   - Default
   - TransparentFX

@@ -10,10 +10,15 @@ public class GameManager : MonoBehaviour
     public enum Turn { PlayerAttack, PlayerDefense }
     public Turn currentTurn;
     public float matchDuration = 140f;
+
+    private int matchCount = 0;
     private float matchTimer;
+    private int PlayerWins = 0;
+    private int EnemyWins = 0;
 
     public SoldierSpawner soldierSpawner;
     public BallManager ballManager;
+    
     public bool isRushTime = false;
     public ResultScreen resultScreen;
 
@@ -44,7 +49,7 @@ public class GameManager : MonoBehaviour
     {
         matchTimer -= Time.deltaTime;
 
-       
+
         if (!isRushTime && matchTimer <= 15f)
         {
             isRushTime = true;
@@ -54,20 +59,48 @@ public class GameManager : MonoBehaviour
 
         if (matchTimer <= 0f)
         {
-            EndMatch();
+            StartCoroutine(EndMatch());
         }
+
+        if (matchCount == 5)
+        {
+            if (PlayerWins > EnemyWins)
+            {
+                //player wins;
+            }
+            else if (PlayerWins > EnemyWins)
+            {
+                //enemy wins;
+            }
+            else
+            {
+
+            }
+        }
+
+        
     }
 
     public void OnGoalScored(bool playerScored)
     {
-        this.playerScored = playerScored; 
+        this.playerScored = playerScored;
+        if (playerScored)
+        {
+            PlayerWins++;
+        }
+        else
+        {
+            EnemyWins++;
+        }
         Debug.Log(playerScored ? "PLAYER SCORED!" : "ENEMY SCORED!");
-        EndMatch(); // Or handle win tracking
+       StartCoroutine( EndMatch()); // Or handle win tracking
     }
 
     void StartNewMatch(Turn turn)
     {
+        matchCount++;
         currentTurn = turn;
+        GoalGateManager.Instance.setGatesTag();
         matchTimer = matchDuration;
         soldierSpawner.SetTurn(turn == Turn.PlayerAttack ? SoldierSpawner.TurnType.Attacker : SoldierSpawner.TurnType.Defender);
 
@@ -76,26 +109,54 @@ public class GameManager : MonoBehaviour
         ballManager.SpawnBall(playerAttacking);
     }
 
-   
 
-    void EndMatch()
+
+    IEnumerator EndMatch()
     {
-        // You can add win/loss condition checks here
-        Turn nextTurn = currentTurn == Turn.PlayerAttack ? Turn.PlayerDefense : Turn.PlayerAttack;
-        StartNewMatch(nextTurn);
 
+        if ( resultScreen.gameObject.activeInHierarchy ==false )
+        {            
+            resultScreen.gameObject.SetActive(true);
+        }
         if (playerScored)
-            resultScreen.ShowResult("You Win!");
+            resultScreen.ShowResult("You Scores!");
         else if (!playerScored)
-            resultScreen.ShowResult("You Lose!");
+            resultScreen.ShowResult("Enemy Scores!");
         else
             resultScreen.ShowResult("Draw!");
+
+        yield return new WaitForSeconds(3f);
+
+        if (resultScreen.gameObject.activeInHierarchy == true)
+        {
+            resultScreen.gameObject.SetActive(false);
+        }
+
+        // You can add win/loss condition checks here
+        Turn nextTurn = currentTurn == Turn.PlayerAttack ? Turn.PlayerDefense : Turn.PlayerAttack;
+        if (matchCount <= 5)
+        {
+            ResetMatch();
+            StartNewMatch(nextTurn);
+        }
+        
     }
 
+    private void ResetMatch()
+    {
+        Destroy(ballManager.GetBall());
+       
+        Soldier[] soldiers = GameObject.FindObjectsOfType<Soldier>();
+        foreach (Soldier s in soldiers)
+        {
+            Destroy(s.gameObject);
+
+        }
+    }
     void OnRushTimeStarted()
     {
         EnergySystem.Instance.SetRushTime(true);
     }
 
-   
+
 }
