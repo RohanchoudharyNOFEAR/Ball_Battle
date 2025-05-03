@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public Turn currentTurn;
     public float matchDuration = 140f;
 
-    private int matchCount = 0;
+    [SerializeField] private int matchCount = 0;
     private float matchTimer;
   [SerializeField]  private int PlayerWins = 0;
   [SerializeField]  private int EnemyWins = 0;
@@ -62,23 +62,30 @@ public class GameManager : MonoBehaviour
             StartCoroutine(EndMatch());
         }
 
-        if (matchCount == 5)
+        if (matchCount > 5)
         {
-            if (PlayerWins > EnemyWins)
+            if (resultScreen.gameObject.activeInHierarchy == false)
             {
-                //player wins;
+                resultScreen.gameObject.SetActive(true);
             }
-            else if (PlayerWins > EnemyWins)
+            if (PlayerWins > EnemyWins )
             {
-                //enemy wins;
+                resultScreen.ShowResult("You WINN!");
+                resultScreen.ShowButtons(true);
+            }
+            else if (PlayerWins < EnemyWins )
+            {
+                resultScreen.ShowResult("Enemey WINN!");
+                resultScreen.ShowButtons(true);
             }
             else
             {
-
+                resultScreen.ShowResult("Draw!");
+                resultScreen.ShowButtons(true);
             }
-        }
 
-        
+            StopCoroutine(EndMatch());
+        }
     }
 
     public void OnGoalScored(bool playerScored)
@@ -113,33 +120,37 @@ public class GameManager : MonoBehaviour
 
     IEnumerator EndMatch()
     {
-
-        if ( resultScreen.gameObject.activeInHierarchy ==false )
-        {            
-            resultScreen.gameObject.SetActive(true);
-        }
-        if (playerScored)
-            resultScreen.ShowResult("You Scores!");
-        else if (!playerScored)
-            resultScreen.ShowResult("Enemy Scores!");
-        else
-            resultScreen.ShowResult("Draw!");
-
-        yield return new WaitForSeconds(3f);
-
-        if (resultScreen.gameObject.activeInHierarchy == true)
-        {
-            resultScreen.gameObject.SetActive(false);
-        }
-
-        // You can add win/loss condition checks here
-        Turn nextTurn = currentTurn == Turn.PlayerAttack ? Turn.PlayerDefense : Turn.PlayerAttack;
         if (matchCount <= 5)
         {
-            ResetMatch();
-            StartNewMatch(nextTurn);
+            if (resultScreen.gameObject.activeInHierarchy == false)
+            {
+                resultScreen.gameObject.SetActive(true);
+            }
+            if (playerScored)
+            {
+                resultScreen.ShowResult("You Scores!");
+            }
+            else if (!playerScored)
+            {
+                resultScreen.ShowResult("Enemy Scores!");
+            }
+            else
+                resultScreen.ShowResult("Draw!");
+
+            yield return new WaitForSeconds(3f);
+
+            if (resultScreen.gameObject.activeInHierarchy == true)
+            {
+                resultScreen.gameObject.SetActive(false);
+            }
+
+            // You can add win/loss condition checks here
+            Turn nextTurn = currentTurn == Turn.PlayerAttack ? Turn.PlayerDefense : Turn.PlayerAttack;
+           
+                ResetMatch();
+                StartNewMatch(nextTurn);
+            
         }
-        
     }
 
     private void ResetMatch()

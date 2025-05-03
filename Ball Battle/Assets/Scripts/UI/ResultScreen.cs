@@ -9,6 +9,9 @@ public class ResultScreen : MonoBehaviour
     public GameObject panel;
     public TMP_Text resultText;
 
+    public GameObject RestartButton;
+    public GameObject MainMenuButton;
+
     public void ShowResult(string result)
     {
         panel.SetActive(true);
@@ -22,6 +25,20 @@ public class ResultScreen : MonoBehaviour
 
     public void OnMainMenu()
     {
-        SceneManager.LoadScene("MainMenu"); // your menu scene name
+        SceneManager.LoadScene("MainMenuScene"); 
+    }
+
+    public void ShowButtons(bool show)
+    {
+        if (show)
+        {
+            RestartButton.SetActive(true);
+            MainMenuButton.SetActive(true);
+        }
+        else
+        {
+            MainMenuButton.SetActive(false);
+            RestartButton.SetActive(false);
+        }
     }
 }

@@ -291,6 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTurn: 0
   matchDuration: 140
+  matchCount: 0
   PlayerWins: 0
   EnemyWins: 0
   soldierSpawner: {fileID: 67817653}
@@ -1835,6 +1836,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1826545702}
   resultText: {fileID: 1069577679}
+  RestartButton: {fileID: 1562555202}
+  MainMenuButton: {fileID: 748928469}
 --- !u!1 &1469047204
 GameObject:
   m_ObjectHideFlags: 0
