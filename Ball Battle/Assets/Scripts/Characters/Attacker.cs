@@ -26,7 +26,7 @@ public class Attacker : Soldier
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.CompareTag("Fence") || other.CompareTag("EnemyGate")) && !hasBall)
+        if ( other.CompareTag("EnemyGate") && !hasBall)
         {
             Destroy(gameObject);
         }
@@ -79,7 +79,18 @@ public class Attacker : Soldier
         }
 
 
-        if (!hasBall || bestTarget == null) return;
+        if (!hasBall || bestTarget == null)
+        {
+            if (gameManager.currentTurn == GameManager.Turn.PlayerAttack)
+            {
+                gameManager.OnGoalScored(false);
+            }
+            else if(gameManager.currentTurn == GameManager.Turn.PlayerDefense)
+            {
+                gameManager.OnGoalScored(true);
+            }
+            return;
+        }
 
         DropBall();
 

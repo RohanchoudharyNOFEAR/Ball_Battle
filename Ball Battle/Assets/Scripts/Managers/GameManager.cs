@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
 
     private int matchCount = 0;
     private float matchTimer;
-    private int PlayerWins = 0;
-    private int EnemyWins = 0;
+  [SerializeField]  private int PlayerWins = 0;
+  [SerializeField]  private int EnemyWins = 0;
 
     public SoldierSpawner soldierSpawner;
     public BallManager ballManager;

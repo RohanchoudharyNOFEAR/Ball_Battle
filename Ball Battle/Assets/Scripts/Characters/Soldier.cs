@@ -18,6 +18,7 @@ public abstract class Soldier : MonoBehaviour
     public Transform arrowTransform;
     public Animator anim;
 
+    protected GameManager gameManager;
     public virtual void Start()
     {
         rend = GetComponentInChildren<Renderer>();
@@ -25,6 +26,8 @@ public abstract class Soldier : MonoBehaviour
        
         anim = GetComponent<Animator>();
         TransitionToState(new InactiveState(spawnDelay));
+
+        gameManager = GameManager.Instance;
     }
 
     public virtual void Update()
