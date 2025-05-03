@@ -6,17 +6,20 @@ public class EnergySystem : MonoBehaviour
 {
     public static EnergySystem Instance;
     public bool isRush = false;
-    public float energy = 0f;
+    public float PlayerEnergy = 0f;
+    public float EnemyEnergy = 0f;
     public float maxEnergy = 6f;
     public float regenRate = 0.5f;
 
-    public float GetNormalizedEnergy() => energy / maxEnergy;
+    public float GetPlayerNormalizedEnergy() => PlayerEnergy / maxEnergy;
+    public float GetEnemyNormalizedEnergy() => EnemyEnergy / maxEnergy;
     void Awake() => Instance = this;
 
     void Update()
     {
         float rate = isRush ? regenRate * 2f : regenRate;
-        energy = Mathf.Min(maxEnergy, energy + rate * Time.deltaTime);
+        PlayerEnergy = Mathf.Min(maxEnergy, PlayerEnergy + rate * Time.deltaTime);
+        EnemyEnergy = Mathf.Min(maxEnergy, EnemyEnergy + rate * Time.deltaTime);
     }
 
     public void SetRushTime(bool active)
@@ -26,9 +29,18 @@ public class EnergySystem : MonoBehaviour
 
     public bool TryUseEnergy(float cost)
     {
-        if (energy >= cost)
+        if (PlayerEnergy >= cost)
         {
-            energy -= cost;
+            PlayerEnergy -= cost;
+            return true;
+        }
+        return false;
+    }
+    public bool TryUseEnemyEnergy(float cost)
+    {
+        if (EnemyEnergy >= cost)
+        {
+            EnemyEnergy -= cost;
             return true;
         }
         return false;

@@ -7,7 +7,8 @@ using TMPro;
 public class InGameUI : MonoBehaviour
 {
     public TMP_Text timerText;
-    public Slider energyBar;
+    public Slider PlayerEnergyBar;
+    public Slider EnemyEnergyBar;
     public TMP_Text turnText;
 
     private GameManager gm;
@@ -26,6 +27,7 @@ public class InGameUI : MonoBehaviour
             turnText.text = gm.GetCurrentTurnText();
         }
 
-        energyBar.value = es.GetNormalizedEnergy();
+        PlayerEnergyBar.value = es.GetPlayerNormalizedEnergy();
+        EnemyEnergyBar.value = es.GetEnemyNormalizedEnergy();
     }
 }
