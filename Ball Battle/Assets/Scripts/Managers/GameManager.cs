@@ -15,10 +15,12 @@ public class GameManager : MonoBehaviour
     public SoldierSpawner soldierSpawner;
     public BallManager ballManager;
     public bool isRushTime = false;
+    public ResultScreen resultScreen;
 
     public float GetRemainingTime() => matchTimer;
     public string GetCurrentTurnText() => currentTurn == Turn.PlayerAttack ? "Attacking" : "Defending";
 
+    private bool playerScored = false;
     private void Awake()
     {
         if (Instance == null)
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
 
     public void OnGoalScored(bool playerScored)
     {
+        this.playerScored = playerScored; 
         Debug.Log(playerScored ? "PLAYER SCORED!" : "ENEMY SCORED!");
         EndMatch(); // Or handle win tracking
     }
@@ -80,6 +83,13 @@ public class GameManager : MonoBehaviour
         // You can add win/loss condition checks here
         Turn nextTurn = currentTurn == Turn.PlayerAttack ? Turn.PlayerDefense : Turn.PlayerAttack;
         StartNewMatch(nextTurn);
+
+        if (playerScored)
+            resultScreen.ShowResult("You Win!");
+        else if (!playerScored)
+            resultScreen.ShowResult("You Lose!");
+        else
+            resultScreen.ShowResult("Draw!");
     }
 
     void OnRushTimeStarted()
