@@ -6,9 +6,7 @@ public class Attacker : Soldier
 {
     public GameObject ball;
     public Transform enemyGate;
-
     public bool hasBall = false;
-
     public float chaseSpeed = 1.5f;
     public float carrySpeed = 0.75f;
 
