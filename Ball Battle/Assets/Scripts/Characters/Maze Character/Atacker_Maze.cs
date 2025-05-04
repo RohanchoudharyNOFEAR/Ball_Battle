@@ -8,10 +8,33 @@ public class Atacker_Maze : MonoBehaviour
     Animator Animator;
 
     public bool HasBall = false;
+
+    private Inputaction controls;
+    private Vector2 moveInput;
+
+    private void Awake()
+    {
+        controls = new Inputaction();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         Animator = GetComponent<Animator>();
+    }
+
+    void OnEnable()
+    {
+        controls.Enable();
+        controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+    }
+
+    void OnDisable()
+    {
+        controls.Player.Move.performed -= ctx => moveInput = ctx.ReadValue<Vector2>();
+        controls.Player.Move.canceled -= ctx => moveInput = Vector2.zero;
+        controls.Disable();
     }
 
     // Update is called once per frame
@@ -22,18 +45,16 @@ public class Atacker_Maze : MonoBehaviour
 
     private void Move()
     {
-      float x=  Input.GetAxis("Horizontal");
-      float y = Input.GetAxis("Vertical");
-
-        if (x != 0f || y != 0f)
+        if (moveInput != Vector2.zero)
         {
             Animator.SetBool("Run", true);
         }
-        else {
+        else
+        {
             Animator.SetBool("Run", false);
         }
 
-        transform.Translate(x * 5 * Time.deltaTime, 0, y * 5 * Time.deltaTime);
+        transform.Translate(new Vector3(moveInput.x, 0, moveInput.y) * 5 * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)

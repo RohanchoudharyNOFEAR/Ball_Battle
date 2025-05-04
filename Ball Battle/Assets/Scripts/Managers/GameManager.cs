@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     private bool playerScored = false;
     private bool gamemanagerinitlized = false;
     public ARRaycastManager raycastManager;
-
+   // public Inputaction controls;
     private void Awake()
     {
         if (Instance == null)
@@ -41,12 +41,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(Instance);
         }
+       
     }
 
     // Start is called before the first frame update
     void Start()
     {
         raycastManager = FindAnyObjectByType<ARRaycastManager>();
+       
         //StartNewMatch(Turn.PlayerAttack);
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -16,25 +17,45 @@ public class SoldierSpawner : MonoBehaviour
 
     public EnergySystem energySystem;
 
-   
+    public Inputaction controls;
 
+   [SerializeField] private bool tapped = false;
 
+    private void Awake()
+    {
+        controls = new Inputaction();
+    }
     private void Start()
     {
-       
+      
     }
 
     void Update()
     {
-        if ( (InitializationManager.instance.initialized && Input.GetMouseButtonDown(0)))
+        if ( (InitializationManager.instance.initialized && tapped))
         {
             HandleTap();
         }
     }
 
+    private void OnEnable()
+    {
+       
+        controls.Enable();
+        controls.Player.Touch.performed += ctx => tapped = true;
+        controls.Player.Touch.canceled += ctx => tapped = false;
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.Touch.performed -= ctx => tapped = true;
+        controls.Player.Touch.canceled -= ctx => tapped = false;
+        controls.Disable();
+    }
+
     void HandleTap()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Pointer.current.position.ReadValue());
 
 
         if (Physics.Raycast(ray, out RaycastHit hit, rayLength, landFieldLayer))
