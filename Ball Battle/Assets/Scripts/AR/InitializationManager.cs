@@ -112,5 +112,20 @@ public class InitializationManager : MonoBehaviour
         Vector3 adjustedPosition = new Vector3(spawnPosition.x, 1.5f, spawnPosition.z); // adjust height as needed
         Instantiate(prefab, adjustedPosition, Quaternion.identity);
         initialized = true;
+        DisablePlaneManager();
+    }
+
+    void DisablePlaneManager()
+    {
+        ARPlaneManager planeManager = GameManager.Instance.planeManager;
+        if (planeManager != null)
+        {
+            planeManager.enabled = false;
+
+            foreach (var plane in planeManager.trackables)
+            {
+                plane.gameObject.SetActive(false);
+            }
+        }
     }
 }

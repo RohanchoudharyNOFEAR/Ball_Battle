@@ -46,7 +46,7 @@ public class Attacker : Soldier
         hasBall = true;
         if (highlight) highlight.SetActive(true);
         ball.transform.SetParent(transform);
-        ball.transform.localPosition = Vector3.forward;
+        ball.transform.localPosition = Vector3.forward * 0.5f;
         //anim?.SetBool("Run", false);
        // anim?.SetBool("Dribble", true);
     }

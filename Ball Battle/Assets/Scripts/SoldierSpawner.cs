@@ -11,7 +11,7 @@ public class SoldierSpawner : MonoBehaviour
     public GameObject defenderPrefab;
     public LayerMask landFieldLayer;
     public float rayLength = 100f;
-
+    public float spawnYPos = 1.5f;
     public enum TurnType { Attacker, Defender }
     public TurnType currentTurn;
 
@@ -20,6 +20,7 @@ public class SoldierSpawner : MonoBehaviour
     public Inputaction controls;
 
    [SerializeField] private bool tapped = false;
+    private bool canSpawn = true;
 
     private void Awake()
     {
@@ -32,7 +33,7 @@ public class SoldierSpawner : MonoBehaviour
 
     void Update()
     {
-        if ( (InitializationManager.instance.initialized && tapped))
+        if ( InitializationManager.instance.initialized && tapped && canSpawn)
         {
             HandleTap();
         }
@@ -97,12 +98,20 @@ public class SoldierSpawner : MonoBehaviour
 
     void SpawnSoldier(GameObject prefab, Vector3 spawnPosition)
     {
-        Vector3 adjustedPosition = new Vector3(spawnPosition.x, 1.5f, spawnPosition.z); // adjust height as needed
+        Vector3 adjustedPosition = new Vector3(spawnPosition.x, spawnYPos, spawnPosition.z); // adjust height as needed
         Instantiate(prefab, adjustedPosition, Quaternion.identity);
+        StartCoroutine(resetCanSpawn());
     }
 
     public void SetTurn(TurnType newTurn)
     {
         currentTurn = newTurn;
+    }
+
+    IEnumerator resetCanSpawn()
+    {
+        canSpawn = false;
+        yield return new WaitForSeconds(1.5f);
+        canSpawn = true;
     }
 }

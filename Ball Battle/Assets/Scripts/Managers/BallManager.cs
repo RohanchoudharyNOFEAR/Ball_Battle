@@ -7,7 +7,7 @@ public class BallManager : MonoBehaviour
     public GameObject ballPrefab;
     public Transform playerField;
     public Transform enemyField;
-
+    public float SpawnYPos = 1.4f;
     public bool isPlayerAttacking;
 
     private GameObject currentBall;
@@ -44,7 +44,7 @@ public class BallManager : MonoBehaviour
 
         return new Vector3(
             Random.Range(center.x - size.x / 2, center.x + size.x / 2),
-            1.7f,
+            SpawnYPos,
             Random.Range(center.z - size.z / 2, center.z + size.z / 2)
         );
     }

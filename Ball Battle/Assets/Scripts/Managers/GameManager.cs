@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     private bool playerScored = false;
     private bool gamemanagerinitlized = false;
     public ARRaycastManager raycastManager;
+    public ARPlaneManager planeManager;
    // public Inputaction controls;
     private void Awake()
     {
@@ -48,7 +49,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         raycastManager = FindAnyObjectByType<ARRaycastManager>();
-       
+        planeManager = FindAnyObjectByType<ARPlaneManager>();
+
         //StartNewMatch(Turn.PlayerAttack);
     }
 
