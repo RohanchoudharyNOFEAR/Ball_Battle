@@ -1851,8 +1851,8 @@ MonoBehaviour:
   arrowTransform: {fileID: 0}
   anim: {fileID: 4097841834489149252}
   detectionRange: 0.5
-  chaseSpeed: 0.7
-  returnSpeed: 1
+  chaseSpeed: 0.3
+  returnSpeed: 0.6
   startPos: {x: 0, y: 0, z: 0}
   defendCircleHighLight: {fileID: 3538135466274362041}
 --- !u!136 &8319207087728766958

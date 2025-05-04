@@ -2822,8 +2822,8 @@ MonoBehaviour:
   ball: {fileID: 0}
   enemyGate: {fileID: 0}
   hasBall: 0
-  chaseSpeed: 0.8
-  carrySpeed: 0.4
+  chaseSpeed: 0.3
+  carrySpeed: 0.1
   highlight: {fileID: 5968082643285256258}
 --- !u!95 &5102532745546434842
 Animator:

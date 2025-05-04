@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameManager_Maze : MonoBehaviour
 {
-
-    public int Timer = 50;
-
+    [SerializeField]
+    private int timer = 50;
+    public int GetTimer {  get { return timer; } }
     public ResultScreen rs;
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,7 @@ public class GameManager_Maze : MonoBehaviour
 
     public void PlayerWin()
     {
-        if (Timer > 0)
+        if (timer > 0)
         {
             rs.gameObject.SetActive(true);
             rs.ShowResult("YOU WIN");
@@ -30,7 +30,7 @@ public class GameManager_Maze : MonoBehaviour
 
     public void PlayerLose()
     {
-        if (Timer <= 0)
+        if (timer <= 0)
         {
             StopCoroutine(updateTimer());
             rs.gameObject.SetActive(true);
@@ -40,11 +40,11 @@ public class GameManager_Maze : MonoBehaviour
 
     IEnumerator updateTimer()
     {
-        while (Timer > 0)
+        while (timer > 0)
         {
             yield return new WaitForSeconds(1);
 
-            Timer--;
+            timer--;
             PlayerLose();
         }
     }
