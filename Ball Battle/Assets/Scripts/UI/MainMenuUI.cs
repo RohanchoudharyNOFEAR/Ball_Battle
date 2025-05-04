@@ -9,11 +9,16 @@ public class MainMenuUI : MonoBehaviour
 
     public void OnStartGame()
     {
-        SceneManager.LoadScene("MainGameScene"); // Name of your game scene
+        SceneManager.LoadScene("MainGameScene"); 
     }
 
     public void OnQuit()
     {
         Application.Quit();
+    }
+
+    public void OnARGameStart()
+    {
+        SceneManager.LoadScene("MainGameSceneAR");
     }
 }

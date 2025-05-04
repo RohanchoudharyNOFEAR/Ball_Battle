@@ -11,6 +11,7 @@ public class GoalGateManager : MonoBehaviour
     public GameObject Fence1;
     public GameObject Fence2;
 
+    private bool goalgateinitalized = false;
     private void Awake()
     {
         if (Instance == null)
@@ -32,7 +33,19 @@ public class GoalGateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+      if(InitializationManager.instance.initialized && goalgateinitalized==false)
+        {
+            Initialize();
+            goalgateinitalized=true;
+        }
+    }
+
+    private void Initialize()
+    {
+        Gate1 = GameObject.Find("Gate1");
+        Gate2 = GameObject.Find("Gate2");
+        Fence1 = GameObject.Find("Fence1");
+        Fence2 = GameObject.Find("Fence2");
     }
 
     public void setGatesTag()

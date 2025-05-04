@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 8481245056471687511}
   - component: {fileID: 1765225183653255843}
   m_Layer: 6
-  m_Name: Fence (1)
+  m_Name: Fence1
   m_TagString: Fence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1443,7 +1443,7 @@ GameObject:
   - component: {fileID: 6854326500030926596}
   - component: {fileID: 6530188342206800751}
   m_Layer: 6
-  m_Name: Fence
+  m_Name: Fence2
   m_TagString: Fence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2014,7 +2014,7 @@ PrefabInstance:
     - target: {fileID: 5017618134789240218, guid: 9dab8772c52fc7c4893fb63a2cf3ab36,
         type: 3}
       propertyPath: m_Name
-      value: EnemyGate
+      value: Gate2
       objectReference: {fileID: 0}
     - target: {fileID: 5017618134789240218, guid: 9dab8772c52fc7c4893fb63a2cf3ab36,
         type: 3}
@@ -2164,7 +2164,7 @@ PrefabInstance:
     - target: {fileID: 5017618134789240218, guid: 9dab8772c52fc7c4893fb63a2cf3ab36,
         type: 3}
       propertyPath: m_Name
-      value: SM_S_Gate
+      value: Gate1
       objectReference: {fileID: 0}
     - target: {fileID: 5686350570854280992, guid: 9dab8772c52fc7c4893fb63a2cf3ab36,
         type: 3}

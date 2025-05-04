@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class SoldierSpawner : MonoBehaviour
 {
@@ -14,9 +16,17 @@ public class SoldierSpawner : MonoBehaviour
 
     public EnergySystem energySystem;
 
+   
+
+
+    private void Start()
+    {
+       
+    }
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if ( (InitializationManager.instance.initialized && Input.GetMouseButtonDown(0)))
         {
             HandleTap();
         }
@@ -25,6 +35,8 @@ public class SoldierSpawner : MonoBehaviour
     void HandleTap()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+
         if (Physics.Raycast(ray, out RaycastHit hit, rayLength, landFieldLayer))
         {
             string tag = hit.collider.tag;
@@ -59,6 +71,8 @@ public class SoldierSpawner : MonoBehaviour
             }
         }
     }
+
+   
 
     void SpawnSoldier(GameObject prefab, Vector3 spawnPosition)
     {

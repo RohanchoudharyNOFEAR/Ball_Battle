@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PenaltyGameScene.unity
     guid: 46bebd999f880a94183be1b0b2b217d5
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/Ar/MainGameSceneAR.unity
+    guid: a8137d200d7eab144a662d9c9ce1690d
+  m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: bf2bf37b3b24cb44d9903699463d1531,
+      type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 35ba101b16ca0024e8f28389b23f4db9,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 364dbea240d397f4c96ecb28a7971758,
+      type: 2}

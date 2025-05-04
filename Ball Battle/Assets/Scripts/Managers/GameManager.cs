@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.ARFoundation;
 using static SoldierSpawner;
 
 public class GameManager : MonoBehaviour
@@ -27,6 +28,9 @@ public class GameManager : MonoBehaviour
     public string GetCurrentTurnText() => currentTurn == Turn.PlayerAttack ? "Attacking" : "Defending";
 
     private bool playerScored = false;
+    private bool gamemanagerinitlized = false;
+    public ARRaycastManager raycastManager;
+
     private void Awake()
     {
         if (Instance == null)
@@ -42,52 +46,67 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartNewMatch(Turn.PlayerAttack);
+        raycastManager = FindAnyObjectByType<ARRaycastManager>();
+        //StartNewMatch(Turn.PlayerAttack);
     }
 
     // Update is called once per frame
     void Update()
     {
-        matchTimer -= Time.deltaTime;
-
-
-        if (!isRushTime && matchTimer <= 15f)
+        if (InitializationManager.instance.initialized == false)
         {
-            isRushTime = true;
-            Debug.Log("Rush Time Started!");
-            OnRushTimeStarted();
+            return;
         }
-
-        if (matchTimer <= 0f)
+        else if(InitializationManager.instance.initialized == true && gamemanagerinitlized == false)
         {
-            StartCoroutine(EndMatch());
+            StartNewMatch(Turn.PlayerAttack);
+            gamemanagerinitlized = true;
         }
+            
 
-        if (matchCount > 5)
-        {
-            if (resultScreen.gameObject.activeInHierarchy == false)
+
+          
+            matchTimer -= Time.deltaTime;
+
+
+            if (!isRushTime && matchTimer <= 15f)
             {
-                resultScreen.gameObject.SetActive(true);
-            }
-            if (PlayerWins > EnemyWins )
-            {
-                resultScreen.ShowResult("You WINN!");
-                resultScreen.ShowButtons(true);
-            }
-            else if (PlayerWins < EnemyWins )
-            {
-                resultScreen.ShowResult("Enemey WINN!");
-                resultScreen.ShowButtons(true);
-            }
-            else
-            {
-                resultScreen.ShowResult("Draw!");
-                SceneManager.LoadScene("PenaltyGameScene"); // Name of your game scene
-              
+                isRushTime = true;
+                Debug.Log("Rush Time Started!");
+                OnRushTimeStarted();
             }
 
-            StopCoroutine(EndMatch());
-        }
+            if (matchTimer <= 0f)
+            {
+                StartCoroutine(EndMatch());
+            }
+
+            if (matchCount > 5)
+            {
+                if (resultScreen.gameObject.activeInHierarchy == false)
+                {
+                    resultScreen.gameObject.SetActive(true);
+                }
+                if (PlayerWins > EnemyWins)
+                {
+                    resultScreen.ShowResult("You WINN!");
+                    resultScreen.ShowButtons(true);
+                }
+                else if (PlayerWins < EnemyWins)
+                {
+                    resultScreen.ShowResult("Enemey WINN!");
+                    resultScreen.ShowButtons(true);
+                }
+                else
+                {
+                    resultScreen.ShowResult("Draw!");
+                    SceneManager.LoadScene("PenaltyGameScene"); // Name of your game scene
+
+                }
+
+                StopCoroutine(EndMatch());
+            }
+        
     }
 
     public void OnGoalScored(bool playerScored)

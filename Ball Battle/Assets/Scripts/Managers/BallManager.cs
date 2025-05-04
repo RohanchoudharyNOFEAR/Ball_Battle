@@ -11,6 +11,22 @@ public class BallManager : MonoBehaviour
     public bool isPlayerAttacking;
 
     private GameObject currentBall;
+    private bool ballManagerInitalized = false;
+
+    private void Update()
+    {
+        if (InitializationManager.instance.initialized && ballManagerInitalized == false)
+        {
+            Initialize();
+            ballManagerInitalized = true;
+        }
+    }
+
+    private void Initialize()
+    {
+        playerField = GameObject.Find("PlayerField").transform;
+        enemyField = GameObject.Find("EnemyField").transform;
+    }
 
     public void SpawnBall(bool playerAttacks)
     {
