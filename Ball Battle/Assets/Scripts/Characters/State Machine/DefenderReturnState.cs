@@ -14,9 +14,9 @@ public class DefenderReturnState : ISoldierState
     public void Update(Soldier s)
     {
         var d = s as Defender;
-        d.transform.position = Vector3.MoveTowards(d.transform.position, d.startPos, d.returnSpeed * Time.deltaTime);
-        d.transform.LookAt(d.startPos);
-        if (Vector3.Distance(d.transform.position, d.startPos) < 0.1f)
+        d.transform.position = Vector3.MoveTowards(d.transform.position, d.StartPos, d.ReturnSpeed * Time.deltaTime);
+        d.transform.LookAt(d.StartPos);
+        if (Vector3.Distance(d.transform.position, d.StartPos) < 0.1f)
         {
             if (GameManager.Instance.isRushTime)
                 d.TransitionToState(new DefenderIdleState());

@@ -23,7 +23,7 @@ public class DefenderChaseState : ISoldierState
     {
         var d = s as Defender;
         Vector3 dir = (target.transform.position - d.transform.position).normalized;
-        d.transform.position += dir * d.chaseSpeed * Time.deltaTime;
+        d.transform.position += dir * d.ChaseSpeed * Time.deltaTime;
         d.transform.LookAt(target.transform.position);
         if (Vector3.Distance(d.transform.position, target.transform.position) < 3.5f)
         {
