@@ -14,7 +14,7 @@ public class AttackerChaseState : ISoldierState
     public void Update(Soldier s)
     {
         var a = s as Attacker;
-        if (a.hasBall)
+        if (a.HasBall)
         {
             s.anim?.SetBool("Run", false);
             s.anim?.SetBool("Dribble", true);
@@ -37,9 +37,12 @@ public class AttackerChaseState : ISoldierState
             Vector3 dir = (a.ball.transform.position - a.transform.position).normalized;
             a.transform.forward = dir;
             a.transform.position += dir * a.chaseSpeed * Time.deltaTime;
-
-            if (Vector3.Distance(a.transform.position, a.ball.transform.position) < 0.3f)
+           
+            float ballcatchthreeshold = a.transform.name == "Attacker_AR(Clone)" ? 0.05f : 0.15f;
+            if (Vector3.Distance(a.transform.position, a.ball.transform.position) < ballcatchthreeshold)
+            {
                 a.PickUpBall();
+            }
         }
         else
         {

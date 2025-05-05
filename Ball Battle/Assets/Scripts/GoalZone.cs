@@ -26,7 +26,7 @@ public class GoalZone : MonoBehaviour
 
 
             Attacker atk = other.GetComponent<Attacker>();
-            if (atk != null && atk.hasBall)
+            if (atk != null && atk.HasBall)
             {
                 if (GameManager.Instance != null)
                 {

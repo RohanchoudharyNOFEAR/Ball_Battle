@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class InGameUI : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class InGameUI : MonoBehaviour
     public Slider PlayerEnergyBar;
     public Slider EnemyEnergyBar;
     public TMP_Text turnText;
+    public GameObject MainMenuButton;
 
     private GameManager gm;
     private EnergySystem es;
@@ -29,5 +31,10 @@ public class InGameUI : MonoBehaviour
 
         PlayerEnergyBar.value = es.GetPlayerNormalizedEnergy();
         EnemyEnergyBar.value = es.GetEnemyNormalizedEnergy();
+    }
+
+    public void OnMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuScene");
     }
 }

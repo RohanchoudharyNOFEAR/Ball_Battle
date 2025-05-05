@@ -19,7 +19,7 @@ public class DefenderIdleState : ISoldierState
 
         foreach (var atk in attackers)
         {
-            if (atk.hasBall && atk.GetCurrentState is AttackerChaseState)
+            if (atk.HasBall && atk.GetCurrentState is AttackerChaseState)
             {
                 float dist = Vector3.Distance(d.transform.position, atk.transform.position);
                 if (dist <= d.detectionRange)

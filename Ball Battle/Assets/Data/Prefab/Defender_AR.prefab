@@ -1850,7 +1850,8 @@ MonoBehaviour:
   activationEffect: {fileID: 0}
   arrowTransform: {fileID: 0}
   anim: {fileID: 4097841834489149252}
-  detectionRange: 0.5
+  collider: {fileID: 0}
+  detectionRange: 0.15
   chaseSpeed: 0.3
   returnSpeed: 0.6
   startPos: {x: 0, y: 0, z: 0}

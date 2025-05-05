@@ -136,6 +136,8 @@ MonoBehaviour:
   isEnemyGoal: 1
   ParticleEffect: {fileID: 8771702518043509366, guid: 363e28624da9f7e47a10cf1530b83692,
     type: 3}
+  GoalColour: {r: 0, g: 0, b: 0, a: 0}
+  Renderer: {fileID: 0}
 --- !u!65 &4190628115937158434
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -155,8 +157,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.78, y: 3.2106972, z: 6.16}
-  m_Center: {x: 0.45179752, y: 1.6053481, z: -2.6204085}
+  m_Size: {x: 4.78, y: 4.8650584, z: 6.16}
+  m_Center: {x: 0.4517974, y: 2.432529, z: -2.6204085}
 --- !u!1 &1100984510131087954
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,6 +494,8 @@ MonoBehaviour:
   isEnemyGoal: 0
   ParticleEffect: {fileID: 8771702518043509366, guid: 363e28624da9f7e47a10cf1530b83692,
     type: 3}
+  GoalColour: {r: 0, g: 0, b: 0, a: 0}
+  Renderer: {fileID: 0}
 --- !u!65 &5924030287252036536
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -511,8 +515,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.0829, y: 3.2106972, z: 5.2410374}
-  m_Center: {x: 0.7445405, y: 1.6053481, z: -2.6204076}
+  m_Size: {x: 4.0829, y: 5.2086916, z: 5.2410374}
+  m_Center: {x: 0.7445406, y: 2.6043446, z: -2.6204076}
 --- !u!1 &2759717366295585782
 GameObject:
   m_ObjectHideFlags: 0
