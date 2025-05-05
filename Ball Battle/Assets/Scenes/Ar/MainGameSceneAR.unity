@@ -1446,7 +1446,7 @@ PrefabInstance:
     - target: {fileID: 7352999499889785825, guid: df493c8fcdb572b4dac0e4c461f5bbe9,
         type: 3}
       propertyPath: spawnYPos
-      value: 1.65
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 7352999499889785825, guid: df493c8fcdb572b4dac0e4c461f5bbe9,
         type: 3}

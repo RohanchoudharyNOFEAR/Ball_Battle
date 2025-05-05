@@ -1213,7 +1213,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 493436201224198951}
@@ -1842,17 +1842,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnDelay: 0.5
-  reactivateTime: 2.5
-  rend: {fileID: 851439427963371933}
-  originalColor: {r: 0, g: 0, b: 0, a: 0}
-  inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   reactivateEffect: {fileID: 0}
   activationEffect: {fileID: 0}
-  arrowTransform: {fileID: 0}
   anim: {fileID: 4097841834489149252}
   collider: {fileID: 0}
-  detectionRange: 0.15
-  chaseSpeed: 0.3
+  rend: {fileID: 851439427963371933}
+  inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  detectionRange: 0.3
+  chaseSpeed: 0.08
   returnSpeed: 0.6
   startPos: {x: 0, y: 0, z: 0}
   defendCircleHighLight: {fileID: 3538135466274362041}

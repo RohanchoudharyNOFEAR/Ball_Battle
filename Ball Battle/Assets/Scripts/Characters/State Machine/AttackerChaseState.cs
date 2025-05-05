@@ -34,11 +34,21 @@ public class AttackerChaseState : ISoldierState
         else if (a.GetBall != null && a.GetBall.transform.parent == null)
         {
             // Ball is free
-            Vector3 dir = (a.GetBall.transform.position - a.transform.position).normalized;
+            //Vector3 dir = (a.GetBall.transform.position - a.transform.position).normalized;
+            //dir.y = 0;
+            //dir = dir.normalized;
+            //a.transform.forward = dir;
+
+            Vector3 targetPos = a.GetBall.transform.position;
+            Vector3 selfPos = a.transform.position;
+
+            targetPos.y = selfPos.y; // flatten on Y
+            Vector3 dir = (targetPos - selfPos).normalized;
             a.transform.forward = dir;
+
             a.transform.position += dir * a.GetChaseSpeed * Time.deltaTime;
            
-            float ballcatchthreeshold = a.transform.name == "Attacker_AR(Clone)" ? 0.05f : 0.15f;
+            float ballcatchthreeshold = a.transform.name == "Attacker_AR(Clone)" ? 0.06f : 0.25f;
             if (Vector3.Distance(a.transform.position, a.GetBall.transform.position) < ballcatchthreeshold)
             {
                 a.PickUpBall();

@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//AudioManager is global class that contains audio data and logic and can be triggered by events by other classes
+//this class usses observer design pattern which is lightlt (not tight) coupled
+//but i prefer global singleton for thsese types of classes , -> i used observer just to show case
+//you can see my vfxmanager implementation that uses singletonn
+
 public class AudioManager : MonoBehaviour
 {
     [System.Serializable]
@@ -163,7 +168,7 @@ public class AudioManager : MonoBehaviour
         source.Play();
     }
 
-    private void OnSholdierSpawn()
+    private void OnSholdierSpawn(GameObject s)
     {
         PlayAudioClip(SoldierSpawnAudio);
     }

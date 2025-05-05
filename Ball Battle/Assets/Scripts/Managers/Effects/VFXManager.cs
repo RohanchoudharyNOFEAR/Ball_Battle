@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//VFX Manager is global Singleton that you can call to play vfx by passing the vfx gameobject
+//i am using singleton because its better for these types of global managers that follow single responsibilty priciple
+// i use observer pattern in Audio Manager just to showcase the obser pettern but i prefer singletion for these types of managers
 public class VFXManager : MonoBehaviour
 {
     public static VFXManager Instance;
@@ -18,7 +21,7 @@ public class VFXManager : MonoBehaviour
         }
     }
 
-    // Call this to play a VFX at a specific position with optional rotation and auto-destroy
+   
     public void PlayEffect(GameObject effectPrefab, Vector3 position, Quaternion? rotation = null, float destroyAfter = 2f)
     {
         if (effectPrefab == null) return;

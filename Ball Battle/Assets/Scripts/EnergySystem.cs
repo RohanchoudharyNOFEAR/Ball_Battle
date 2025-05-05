@@ -9,6 +9,7 @@ public class EnergySystem : MonoBehaviour
     private bool isRush = false;
     private float PlayerEnergy = 0f;
     private float EnemyEnergy = 0f;
+    [Header("Energy Attributes Variables")]
     [SerializeField] private float maxEnergy = 6f;
     [SerializeField] private float regenRate = 0.5f;
 

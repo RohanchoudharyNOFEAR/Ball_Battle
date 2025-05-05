@@ -8,13 +8,15 @@ using UnityEngine.XR.ARSubsystems;
 
 public class SoldierSpawner : MonoBehaviour
 {
+    [Header("Spawn Specific Variables")]
     [SerializeField] private GameObject attackerPrefab;
     [SerializeField] private GameObject defenderPrefab;
     [SerializeField] private LayerMask landFieldLayer;
     [SerializeField] private float rayLength = 100f;
     [SerializeField] private float spawnYPos = 1.5f;
+    [Header("Components")]
     [SerializeField] private EnergySystem energySystem;
-    
+
 
     private Inputaction controls;
     private bool canSpawn = true;
@@ -22,13 +24,7 @@ public class SoldierSpawner : MonoBehaviour
 
     public enum TurnType { Attacker, Defender }
     public TurnType currentTurn;
-    public static Action SoldierSpawnEvent;
-
-    
-    
-
-   
-   
+    public static Action<GameObject> SoldierSpawnEvent;
 
     private void Awake()
     {
@@ -107,10 +103,10 @@ public class SoldierSpawner : MonoBehaviour
     void SpawnSoldier(GameObject prefab, Vector3 spawnPosition)
     {
         Vector3 adjustedPosition = new Vector3(spawnPosition.x, spawnYPos, spawnPosition.z); // adjust height as needed
-        Instantiate(prefab, adjustedPosition, Quaternion.identity);
+        GameObject soldier = Instantiate(prefab, adjustedPosition, Quaternion.identity);
         if (SoldierSpawnEvent != null)
         {
-            SoldierSpawnEvent.Invoke();
+            SoldierSpawnEvent.Invoke(soldier);
         }
         StartCoroutine(resetCanSpawn());
     }

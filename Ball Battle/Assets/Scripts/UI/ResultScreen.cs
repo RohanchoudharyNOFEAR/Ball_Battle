@@ -6,11 +6,11 @@ using UnityEngine.UI;
 using TMPro;
 public class ResultScreen : MonoBehaviour
 {
-    public GameObject panel;
-    public TMP_Text resultText;
+    [SerializeField] private GameObject panel;
+    [SerializeField] private TMP_Text resultText;
 
-    public GameObject RestartButton;
-    public GameObject MainMenuButton;
+    [SerializeField] private GameObject RestartButton;
+    [SerializeField] private GameObject MainMenuButton;
 
     public void ShowResult(string result)
     {

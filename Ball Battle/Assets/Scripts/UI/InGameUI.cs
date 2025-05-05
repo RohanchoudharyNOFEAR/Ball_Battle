@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class InGameUI : MonoBehaviour
 {
-    public TMP_Text timerText;
-    public Slider PlayerEnergyBar;
-    public Slider EnemyEnergyBar;
-    public TMP_Text turnText;
-    public GameObject MainMenuButton;
+    [SerializeField] private TMP_Text timerText;
+    [SerializeField] private Slider PlayerEnergyBar;
+    [SerializeField] private Slider EnemyEnergyBar;
+    [SerializeField] private TMP_Text turnText;
+    [SerializeField] private GameObject MainMenuButton;
 
     private GameManager gm;
     private EnergySystem es;

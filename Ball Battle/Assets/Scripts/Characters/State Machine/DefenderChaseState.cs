@@ -25,15 +25,19 @@ public class DefenderChaseState : ISoldierState
         Vector3 dir = (target.transform.position - d.transform.position).normalized;
         d.transform.position += dir * d.ChaseSpeed * Time.deltaTime;
         d.transform.LookAt(target.transform.position);
-        if (Vector3.Distance(d.transform.position, target.transform.position) < 3.5f)
+        float attackercatchthreeshold = d.transform.name == "Defender_AR(Clone)" ? 0.0495f : 3.5f;
+        if (Vector3.Distance(d.transform.position, target.transform.position) < attackercatchthreeshold)
         {
-          //  d.transform.LookAt(target.transform.position);
-            s.anim?.SetTrigger("Touch");
-            if (CaughtAttackerEvent != null)
+            if (target.GetComponent<Attacker>().HasBall)
             {
-                CaughtAttackerEvent.Invoke();
+                //  d.transform.LookAt(target.transform.position);
+                s.anim?.SetTrigger("Touch");
+                if (CaughtAttackerEvent != null)
+                {
+                    CaughtAttackerEvent.Invoke();
+                }
+                target.PassBallTo();
             }
-            target.PassBallTo();
             d.TransitionToState(new DefenderReturnState());
         }
     }

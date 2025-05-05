@@ -8,6 +8,7 @@ public class GoalGateManager : MonoBehaviour
 
     private GameManager gameManager;
     private bool goalgateinitalized = false;
+    [Header("Goal and Fence GameObjects")]
     [SerializeField] private GoalZone Gate1;
     [SerializeField] private GoalZone Gate2;
     [SerializeField] private FenceZone Fence1;

@@ -6,15 +6,20 @@ using UnityEngine.SceneManagement;
 using UnityEngine.XR.ARFoundation;
 using static SoldierSpawner;
 
+//GameManager is global singeton class that is responsibe for logic behind a single game session -
+// like match timer, win counts, etc.
+//also acting as server provider for used components like soldierSpawner,etc
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-   
+    [Header("Match Session Variables")]
     [SerializeField] private float matchDuration = 140f;
     [SerializeField] private int matchCount = 0;
     [SerializeField] private int PlayerWins = 0;
     [SerializeField] private int EnemyWins = 0;
+
+    [Header("Match Session Components")]
     [SerializeField] private SoldierSpawner soldierSpawner;
     [SerializeField] private BallManager ballManager;
     [SerializeField] private ResultScreen resultScreen;
@@ -23,13 +28,16 @@ public class GameManager : MonoBehaviour
     private bool isRushTime = false;
     private bool playerScored = false;
     private bool gamemanagerinitlized = false;
-
+    [SerializeField] private List<GameObject> activeSoldiers;
     public bool IsRushTime => isRushTime;
     public float GetRemainingTime() => matchTimer;
     public string GetCurrentTurnText() => currentTurn == Turn.PlayerAttack ? "Attacking" : "Defending";
 
+
     public enum Turn { PlayerAttack, PlayerDefense }
+    [Header("Game Manager Specific")]
     public Turn currentTurn;
+    [Header("AR Specific Component")]
     public ARRaycastManager raycastManager;
     public ARPlaneManager planeManager;
     public Action PlayerLoseEvent;
@@ -55,7 +63,16 @@ public class GameManager : MonoBehaviour
         raycastManager = FindAnyObjectByType<ARRaycastManager>();
         planeManager = FindAnyObjectByType<ARPlaneManager>();
 
-        //StartNewMatch(Turn.PlayerAttack);
+    }
+
+    private void OnEnable()
+    {
+        SoldierSpawner.SoldierSpawnEvent += addSpawnToSoldierList;
+    }
+
+    private void OnDisable()
+    {
+        SoldierSpawner.SoldierSpawnEvent -= addSpawnToSoldierList;
     }
 
     // Update is called once per frame
@@ -70,12 +87,15 @@ public class GameManager : MonoBehaviour
             StartNewMatch(Turn.PlayerAttack);
             gamemanagerinitlized = true;
         }
+     
+        HandleMatchTimer();
+        Handle5MatchSessionEnd();
+    }
 
-
-
-
+   
+    void HandleMatchTimer()
+    {
         matchTimer -= Time.deltaTime;
-
 
         if (!IsRushTime && matchTimer <= 15f)
         {
@@ -88,7 +108,9 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(EndMatch());
         }
-
+    }
+    void Handle5MatchSessionEnd()
+    {
         if (matchCount > 5)
         {
             if (resultScreen.gameObject.activeInHierarchy == false)
@@ -122,9 +144,24 @@ public class GameManager : MonoBehaviour
 
             StopCoroutine(EndMatch());
         }
-
     }
 
+    void addSpawnToSoldierList(GameObject s)
+    {
+        activeSoldiers.Add(s);
+    }
+
+    void ClearActiveSoilders()
+    {
+        foreach (GameObject s in activeSoldiers)
+        {
+            if (s != null)
+            {
+                Destroy(s);
+            }
+        }
+        activeSoldiers.Clear();
+    }
     public void OnGoalScored(bool playerScored)
     {
         this.playerScored = playerScored;
@@ -160,8 +197,6 @@ public class GameManager : MonoBehaviour
         bool playerAttacking = (turn == Turn.PlayerAttack);
         ballManager.SpawnBall(playerAttacking);
     }
-
-
 
     IEnumerator EndMatch()
     {
@@ -201,18 +236,11 @@ public class GameManager : MonoBehaviour
     private void ResetMatch()
     {
         Destroy(ballManager.GetBall());
-
-        Soldier[] soldiers = GameObject.FindObjectsOfType<Soldier>();
-        foreach (Soldier s in soldiers)
-        {
-            Destroy(s.gameObject);
-
-        }
+        ClearActiveSoilders();
     }
     void OnRushTimeStarted()
     {
         EnergySystem.Instance.SetRushTime(true);
     }
-
 
 }

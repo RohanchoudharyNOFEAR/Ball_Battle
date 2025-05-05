@@ -467,7 +467,7 @@ MonoBehaviour:
   PlayerEnergyBar: {fileID: 1880870727}
   EnemyEnergyBar: {fileID: 1063717167}
   turnText: {fileID: 854151796}
-  MainMenuButton: {fileID: 0}
+  MainMenuButton: {fileID: 271768997}
 --- !u!1 &486281654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,7 +1402,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 215.4, y: 57.8}
+  m_SizeDelta: {x: 269.87, y: 57.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &854151796
 MonoBehaviour:
@@ -2481,8 +2481,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -147.8, y: 28.099976}
-  m_SizeDelta: {x: 285.1, y: 101.4}
+  m_AnchoredPosition: {x: -161, y: 28.099976}
+  m_SizeDelta: {x: 317.6, y: 101.4}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1612451286
 MonoBehaviour:
@@ -2815,7 +2815,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -564.8, y: 138.4}
+  m_AnchoredPosition: {x: -605, y: 138.4}
   m_SizeDelta: {x: 550, y: 131.8}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1880870727

@@ -11,7 +11,7 @@ public class Attacker : Soldier
     [SerializeField] private float carrySpeed = 0.75f;
 
 
-    private bool hasBall = false;
+  [SerializeField]  private bool hasBall = false;
     public bool HasBall { get { return hasBall; } }
     public float GetChaseSpeed { get { return chaseSpeed; } }
     public float GetCarrySpeed { get { return carrySpeed; } }
@@ -121,7 +121,8 @@ public class Attacker : Soldier
         float t = 0;
         float duration = 0.5f;
         Vector3 start = GetBall.transform.position;
-        Vector3 end = target.transform.position + Vector3.forward;
+        
+        Vector3 end = target.transform.position + Vector3.forward*0.1f;
 
         while (t < 1)
         {

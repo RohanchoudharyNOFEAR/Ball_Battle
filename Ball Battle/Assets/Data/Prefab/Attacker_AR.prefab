@@ -2811,20 +2811,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnDelay: 0.5
-  reactivateTime: 2.5
-  rend: {fileID: 6888331879741179757}
-  originalColor: {r: 0, g: 0, b: 0, a: 0}
-  inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   reactivateEffect: {fileID: 0}
   activationEffect: {fileID: 0}
-  arrowTransform: {fileID: 0}
   anim: {fileID: 0}
+  collider: {fileID: 0}
+  rend: {fileID: 6888331879741179757}
+  inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   ball: {fileID: 0}
   enemyGate: {fileID: 0}
-  hasBall: 0
-  chaseSpeed: 0.3
-  carrySpeed: 0.1
   highlight: {fileID: 5968082643285256258}
+  chaseSpeed: 0.08
+  carrySpeed: 0.04
 --- !u!95 &5102532745546434842
 Animator:
   serializedVersion: 5
