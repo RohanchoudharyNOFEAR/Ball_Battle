@@ -11,17 +11,13 @@ public class InitializationManager : MonoBehaviour
 {
 
     public static InitializationManager instance;
-    public bool initialized = false;
-    public GameObject Field;
-    private ARRaycastManager raycastManager;
+    public bool GetInitilized {  get { return initilized; } }
 
-    public TMP_Text uitext1;
-    public TMP_Text uitext2;
-    public TMP_Text uitext3;
-    private Inputaction controls;
+    [SerializeField] private GameObject Field;
     [SerializeField] private bool tapped = false;
-  
-    
+    private ARRaycastManager raycastManager;
+    private Inputaction controls;
+  [SerializeField]  private bool initilized = false;
 
     private void Awake()
     {
@@ -38,12 +34,12 @@ public class InitializationManager : MonoBehaviour
         {
             raycastManager = GameManager.Instance.raycastManager;
         }
-       
+
     }
 
     private void OnEnable()
     {
-        
+
         controls.Enable();
         controls.Player.Touch.performed += ctx => tapped = true;
         controls.Player.Touch.canceled += ctx => tapped = false;
@@ -59,35 +55,19 @@ public class InitializationManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (tapped && Field != null && initialized == false)
+        if (tapped && Field != null && GetInitilized == false)
         {
             HandleTap();
         }
 
-        if(tapped)
-        {
-            if (uitext3 != null)
-            {
-                uitext3.text = "Tapped on";
-            }
-        }
-        else
-        {
-            if (uitext3 != null)
-            {
-                uitext3.text = "Tapped off";
-            }
-        }
+       
     }
 
     void HandleTap()
     {
         Ray ray = Camera.main.ScreenPointToRay(Pointer.current.position.ReadValue());
 
-        if (uitext1 != null)
-        {
-            uitext1.text = ray.ToString();
-        }
+       
         // For AR, use raycasting to find the point in the real world
         if (raycastManager != null)
         {
@@ -95,10 +75,7 @@ public class InitializationManager : MonoBehaviour
             if (raycastManager.Raycast(ray, hits, TrackableType.PlaneWithinPolygon))
             {
                 Pose hitPose = hits[0].pose;
-                if (uitext2 != null)
-                {
-                    uitext2.text = hitPose.ToString();
-                }
+               
                 SpawnField(Field, hitPose.position);
 
 
@@ -111,7 +88,7 @@ public class InitializationManager : MonoBehaviour
     {
         Vector3 adjustedPosition = new Vector3(spawnPosition.x, 1.5f, spawnPosition.z); // adjust height as needed
         Instantiate(prefab, adjustedPosition, Quaternion.identity);
-        initialized = true;
+        initilized = true;
         DisablePlaneManager();
     }
 

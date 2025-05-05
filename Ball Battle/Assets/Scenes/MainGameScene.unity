@@ -3187,6 +3187,11 @@ PrefabInstance:
       propertyPath: resultScreen
       value: 
       objectReference: {fileID: 1351390840}
+    - target: {fileID: 8448676125584691626, guid: df493c8fcdb572b4dac0e4c461f5bbe9,
+        type: 3}
+      propertyPath: initilized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8622401665388469461, guid: df493c8fcdb572b4dac0e4c461f5bbe9,
         type: 3}
       propertyPath: MaxAudioSources

@@ -36,7 +36,7 @@ public class SoldierSpawner : MonoBehaviour
 
     void Update()
     {
-        if ( InitializationManager.instance.initialized && tapped && canSpawn)
+        if ( InitializationManager.instance.GetInitilized && tapped && canSpawn)
         {
             HandleTap();
         }

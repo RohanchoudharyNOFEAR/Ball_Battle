@@ -61,11 +61,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InitializationManager.instance.initialized == false)
+        if (InitializationManager.instance.GetInitilized == false)
         {
             return;
         }
-        else if (InitializationManager.instance.initialized == true && gamemanagerinitlized == false)
+        else if (InitializationManager.instance.GetInitilized == true && gamemanagerinitlized == false)
         {
             StartNewMatch(Turn.PlayerAttack);
             gamemanagerinitlized = true;

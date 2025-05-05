@@ -23,7 +23,7 @@ public class BallManager : MonoBehaviour
 
     private void Update()
     {
-        if (InitializationManager.instance.initialized && ballManagerInitalized == false)
+        if (InitializationManager.instance.GetInitilized && ballManagerInitalized == false)
         {
             Initialize();
             ballManagerInitalized = true;

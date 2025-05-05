@@ -35,7 +35,7 @@ public class GoalGateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InitializationManager.instance.initialized && goalgateinitalized == false)
+        if (InitializationManager.instance.GetInitilized && goalgateinitalized == false)
         {
             Initialize();
             goalgateinitalized = true;
