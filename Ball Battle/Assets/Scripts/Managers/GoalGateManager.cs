@@ -5,13 +5,15 @@ using UnityEngine;
 public class GoalGateManager : MonoBehaviour
 {
     public static GoalGateManager Instance;
-    private GameManager gameManager;
-    public GoalZone Gate1;
-    public GoalZone Gate2;
-    public FenceZone Fence1;
-    public FenceZone Fence2;
 
+    private GameManager gameManager;
     private bool goalgateinitalized = false;
+    [SerializeField] private GoalZone Gate1;
+    [SerializeField] private GoalZone Gate2;
+    [SerializeField] private FenceZone Fence1;
+    [SerializeField] private FenceZone Fence2;
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -27,16 +29,16 @@ public class GoalGateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
 
     // Update is called once per frame
     void Update()
     {
-      if(InitializationManager.instance.initialized && goalgateinitalized==false)
+        if (InitializationManager.instance.initialized && goalgateinitalized == false)
         {
             Initialize();
-            goalgateinitalized=true;
+            goalgateinitalized = true;
         }
     }
 
@@ -53,8 +55,8 @@ public class GoalGateManager : MonoBehaviour
         gameManager = GameManager.Instance;
         if (gameManager.currentTurn == GameManager.Turn.PlayerAttack)
         {
-            Gate1.isEnemyGoal = false;
-            Gate2.isEnemyGoal = true;
+            Gate1.IsEnemyGoal = false;
+            Gate2.IsEnemyGoal = true;
             Gate2.Renderer.material.color = Gate2.GoalColour;
 
             Fence1.isEnemyGoal = false;

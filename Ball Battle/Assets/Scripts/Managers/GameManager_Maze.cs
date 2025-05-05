@@ -7,7 +7,8 @@ public class GameManager_Maze : MonoBehaviour
     [SerializeField]
     private int timer = 50;
     public int GetTimer {  get { return timer; } }
-    public ResultScreen rs;
+   [SerializeField] private ResultScreen rs;
+
     // Start is called before the first frame update
     void Start()
     {

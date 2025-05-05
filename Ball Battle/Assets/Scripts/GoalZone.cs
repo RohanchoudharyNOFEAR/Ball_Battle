@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class GoalZone : MonoBehaviour
 {
-    public bool isEnemyGoal; // true = enemy gate = player wins if reached
-    public GameObject ParticleEffect;
-    public Color GoalColour;
-    public Renderer Renderer;
+    [SerializeField] private bool isEnemyGoal; // true = enemy gate = player wins if reached
+    [SerializeField] private Color goalColour;
+    [SerializeField] private Renderer renderer;
+    [SerializeField] private GameObject ParticleEffect;
+    public bool IsEnemyGoal {  get { return isEnemyGoal; } set { isEnemyGoal = value; } }
+    public Color GoalColour => goalColour;
+    public Renderer Renderer => renderer;
+
+    
 
     private void Awake()
     {
-        Renderer = GetComponent<Renderer>();
+        renderer = GetComponent<Renderer>();
       
     }
     private void Start()
@@ -30,7 +35,7 @@ public class GoalZone : MonoBehaviour
             {
                 if (GameManager.Instance != null)
                 {
-                    GameManager.Instance.OnGoalScored(isEnemyGoal);
+                    GameManager.Instance.OnGoalScored(IsEnemyGoal);
                     VFXManager.Instance.PlayEffect(ParticleEffect, transform.position,3);
                     VFXManager.Instance.PlayEffect(ParticleEffect, transform.position *-0.5f, 3);
                 }
