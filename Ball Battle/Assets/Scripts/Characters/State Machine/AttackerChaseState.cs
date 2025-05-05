@@ -19,10 +19,10 @@ public class AttackerChaseState : ISoldierState
             s.anim?.SetBool("Run", false);
             s.anim?.SetBool("Dribble", true);
            // s.anim?.SetBool("Run", false);
-            float moveSpeed =  GameManager.Instance.isRushTime ? a.chaseSpeed : a.carrySpeed;
-            if (a.enemyGate != null)
+            float moveSpeed =  GameManager.Instance.isRushTime ? a.GetChaseSpeed : a.GetCarrySpeed;
+            if (a.GetEnemyGate != null)
             {
-                Vector3 dirToGate = (a.enemyGate.position - a.transform.position).normalized;
+                Vector3 dirToGate = (a.GetEnemyGate.position - a.transform.position).normalized;
                 dirToGate.y = 0;
                 dirToGate = dirToGate.normalized;
                 a.transform.forward = dirToGate;
@@ -31,15 +31,15 @@ public class AttackerChaseState : ISoldierState
             }
            // a.transform.position += a.transform.forward * moveSpeed * Time.deltaTime;
         }
-        else if (a.ball != null && a.ball.transform.parent == null)
+        else if (a.GetBall != null && a.GetBall.transform.parent == null)
         {
             // Ball is free
-            Vector3 dir = (a.ball.transform.position - a.transform.position).normalized;
+            Vector3 dir = (a.GetBall.transform.position - a.transform.position).normalized;
             a.transform.forward = dir;
-            a.transform.position += dir * a.chaseSpeed * Time.deltaTime;
+            a.transform.position += dir * a.GetChaseSpeed * Time.deltaTime;
            
             float ballcatchthreeshold = a.transform.name == "Attacker_AR(Clone)" ? 0.05f : 0.15f;
-            if (Vector3.Distance(a.transform.position, a.ball.transform.position) < ballcatchthreeshold)
+            if (Vector3.Distance(a.transform.position, a.GetBall.transform.position) < ballcatchthreeshold)
             {
                 a.PickUpBall();
             }
@@ -47,11 +47,11 @@ public class AttackerChaseState : ISoldierState
         else
         {
             // Ball is held by someone else
-            if (a.enemyGate != null)
+            if (a.GetEnemyGate != null)
             {
-                Vector3 dir = (a.enemyGate.position - a.transform.position).normalized;
+                Vector3 dir = (a.GetEnemyGate.position - a.transform.position).normalized;
                 a.transform.forward = dir;
-                a.transform.position += dir * a.chaseSpeed * Time.deltaTime;
+                a.transform.position += dir * a.GetChaseSpeed * Time.deltaTime;
             }
         }
     }

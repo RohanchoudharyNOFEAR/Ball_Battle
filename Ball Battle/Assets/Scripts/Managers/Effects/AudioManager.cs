@@ -137,7 +137,7 @@ public class AudioManager : MonoBehaviour
 
     AudioSource GetAvailableAudioSource()
     {
-        Debug.Log(_freeAudioSources.Count + "freeaudiosource");
+       // Debug.Log(_freeAudioSources.Count + "freeaudiosource");
         if (_freeAudioSources.Count > 0)
         {
 

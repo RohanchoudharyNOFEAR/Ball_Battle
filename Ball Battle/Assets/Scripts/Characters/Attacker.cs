@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class Attacker : Soldier
 {
-    public GameObject ball;
-    public Transform enemyGate;
+    [SerializeField] private GameObject ball;
+    [SerializeField] private Transform enemyGate;
+    [SerializeField] private GameObject highlight;
+    [SerializeField] private float chaseSpeed = 1.5f;
+    [SerializeField] private float carrySpeed = 0.75f;
+
+
     private bool hasBall = false;
-    public bool HasBall {  get { return hasBall; } }
-   [SerializeField] private float chaseSpeed = 1.5f;
-   [SerializeField] private float carrySpeed = 0.75f;
-    
-    public GameObject highlight;
+    public bool HasBall { get { return hasBall; } }
+    public float GetChaseSpeed { get { return chaseSpeed; } }
+    public float GetCarrySpeed { get { return carrySpeed; } }
+    public GameObject GetBall { get { return ball; } }
+    public Transform GetEnemyGate { get { return enemyGate; } }
+
 
     public override void Start()
     {
@@ -32,7 +38,7 @@ public class Attacker : Soldier
 
     private void OnTriggerEnter(Collider other)
     {
-        if ( other.CompareTag("EnemyGate") && !hasBall)
+        if (other.CompareTag("EnemyGate") && !hasBall)
         {
             Destroy(gameObject);
         }
@@ -46,17 +52,17 @@ public class Attacker : Soldier
     {
         hasBall = true;
         if (highlight) highlight.SetActive(true);
-        ball.transform.SetParent(transform);
-        ball.transform.localPosition = Vector3.forward * 0.5f;
+        GetBall.transform.SetParent(transform);
+        GetBall.transform.localPosition = Vector3.forward * 0.5f;
         //anim?.SetBool("Run", false);
-       // anim?.SetBool("Dribble", true);
+        // anim?.SetBool("Dribble", true);
     }
 
     public void DropBall()
     {
         hasBall = false;
         if (highlight) highlight.SetActive(false);
-        ball.transform.SetParent(null);
+        GetBall.transform.SetParent(null);
         anim?.SetBool("Dribble", false);
         anim?.SetTrigger("Pass");
         // anim?.SetBool("HasBall", false);
@@ -75,7 +81,7 @@ public class Attacker : Soldier
             if (teammate != this)
             {
                 float distToteamate = Vector3.Distance(teammate.transform.position, transform.position);
-             
+
                 if (distToteamate < mindistance)
                 {
                     mindistance = distToteamate;
@@ -92,7 +98,7 @@ public class Attacker : Soldier
             {
                 gameManager.OnGoalScored(false);
             }
-            else if(gameManager.currentTurn == GameManager.Turn.PlayerDefense)
+            else if (gameManager.currentTurn == GameManager.Turn.PlayerDefense)
             {
                 gameManager.OnGoalScored(true);
             }
@@ -103,9 +109,9 @@ public class Attacker : Soldier
         DropBall();
 
         hasBall = false;
-      //  highlight?.SetActive(false);
-      //  ball.transform.SetParent(null);
-     //   anim?.SetBool("Dribble", false);
+        //  highlight?.SetActive(false);
+        //  ball.transform.SetParent(null);
+        //   anim?.SetBool("Dribble", false);
 
         StartCoroutine(SmoothPass(bestTarget));
     }
@@ -114,13 +120,13 @@ public class Attacker : Soldier
     {
         float t = 0;
         float duration = 0.5f;
-        Vector3 start = ball.transform.position;
+        Vector3 start = GetBall.transform.position;
         Vector3 end = target.transform.position + Vector3.forward;
 
         while (t < 1)
         {
             t += Time.deltaTime / duration;
-            ball.transform.position = Vector3.Lerp(start, end, t);
+            GetBall.transform.position = Vector3.Lerp(start, end, t);
             yield return null;
         }
 
