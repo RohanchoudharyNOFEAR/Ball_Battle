@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class BallManager : MonoBehaviour
 {
-    public GameObject ballPrefab;
-    public Transform playerField;
-    public Transform enemyField;
-    public float SpawnYPos = 1.4f;
-    public bool isPlayerAttacking;
+    [SerializeField] private GameObject ballPrefab;
+    [SerializeField] private Transform playerField;
+    [SerializeField] private Transform enemyField;
+    [SerializeField] private float spawnYPos = 1.4f;
+    [SerializeField] private bool isPlayerAttacking;
 
     private GameObject currentBall;
     private bool ballManagerInitalized = false;
+    public GameObject BallPrefab => ballPrefab;
+    public Transform PlayerField => playerField;
+    public Transform EnemyField => enemyField;
+    public float SpawnYPos => spawnYPos;
+    public bool IsPlayerAttacking => isPlayerAttacking;
+
+   
 
     private void Update()
     {
@@ -32,8 +39,8 @@ public class BallManager : MonoBehaviour
     {
         isPlayerAttacking = playerAttacks;
 
-        Vector3 spawnPos = GetRandomPositionOnField(playerAttacks ? playerField : enemyField);
-        currentBall = Instantiate(ballPrefab, spawnPos, Quaternion.identity);
+        Vector3 spawnPos = GetRandomPositionOnField(playerAttacks ? PlayerField : EnemyField);
+        currentBall = Instantiate(BallPrefab, spawnPos, Quaternion.identity);
     }
 
     Vector3 GetRandomPositionOnField(Transform field)

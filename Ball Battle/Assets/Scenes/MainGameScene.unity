@@ -3164,6 +3164,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3024935078569879263, guid: df493c8fcdb572b4dac0e4c461f5bbe9,
         type: 3}
+      propertyPath: spawnYPos
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024935078569879263, guid: df493c8fcdb572b4dac0e4c461f5bbe9,
+        type: 3}
       propertyPath: enemyField
       value: 
       objectReference: {fileID: 120420230}
