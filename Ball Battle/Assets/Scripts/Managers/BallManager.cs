@@ -12,6 +12,7 @@ public class BallManager : MonoBehaviour
 
     private GameObject currentBall;
     private bool ballManagerInitalized = false;
+
     public GameObject BallPrefab => ballPrefab;
     public Transform PlayerField => playerField;
     public Transform EnemyField => enemyField;

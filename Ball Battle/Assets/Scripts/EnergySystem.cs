@@ -5,11 +5,12 @@ using UnityEngine;
 public class EnergySystem : MonoBehaviour
 {
     public static EnergySystem Instance;
-    public bool isRush = false;
-    public float PlayerEnergy = 0f;
-    public float EnemyEnergy = 0f;
-    public float maxEnergy = 6f;
-    public float regenRate = 0.5f;
+
+    private bool isRush = false;
+    private float PlayerEnergy = 0f;
+    private float EnemyEnergy = 0f;
+    [SerializeField] private float maxEnergy = 6f;
+    [SerializeField] private float regenRate = 0.5f;
 
     public float GetPlayerNormalizedEnergy() => PlayerEnergy / maxEnergy;
     public float GetEnemyNormalizedEnergy() => EnemyEnergy / maxEnergy;
