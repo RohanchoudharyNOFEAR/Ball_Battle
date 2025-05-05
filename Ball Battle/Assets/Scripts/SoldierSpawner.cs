@@ -8,22 +8,27 @@ using UnityEngine.XR.ARSubsystems;
 
 public class SoldierSpawner : MonoBehaviour
 {
-    public GameObject attackerPrefab;
-    public GameObject defenderPrefab;
-    public LayerMask landFieldLayer;
-    public float rayLength = 100f;
-    public float spawnYPos = 1.5f;
+    [SerializeField] private GameObject attackerPrefab;
+    [SerializeField] private GameObject defenderPrefab;
+    [SerializeField] private LayerMask landFieldLayer;
+    [SerializeField] private float rayLength = 100f;
+    [SerializeField] private float spawnYPos = 1.5f;
+    [SerializeField] private EnergySystem energySystem;
+    
+
+    private Inputaction controls;
+    private bool canSpawn = true;
+    private bool tapped = false;
+
     public enum TurnType { Attacker, Defender }
     public TurnType currentTurn;
-
-    public EnergySystem energySystem;
-
-    public Inputaction controls;
-
     public static Action SoldierSpawnEvent;
 
-   [SerializeField] private bool tapped = false;
-    private bool canSpawn = true;
+    
+    
+
+   
+   
 
     private void Awake()
     {
@@ -31,12 +36,12 @@ public class SoldierSpawner : MonoBehaviour
     }
     private void Start()
     {
-      
+
     }
 
     void Update()
     {
-        if ( InitializationManager.instance.GetInitilized && tapped && canSpawn)
+        if (InitializationManager.instance.GetInitilized && tapped && canSpawn)
         {
             HandleTap();
         }
@@ -44,7 +49,7 @@ public class SoldierSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-       
+
         controls.Enable();
         controls.Player.Touch.performed += ctx => tapped = true;
         controls.Player.Touch.canceled += ctx => tapped = false;
@@ -97,13 +102,13 @@ public class SoldierSpawner : MonoBehaviour
         }
     }
 
-   
+
 
     void SpawnSoldier(GameObject prefab, Vector3 spawnPosition)
     {
         Vector3 adjustedPosition = new Vector3(spawnPosition.x, spawnYPos, spawnPosition.z); // adjust height as needed
         Instantiate(prefab, adjustedPosition, Quaternion.identity);
-        if(SoldierSpawnEvent!=null)
+        if (SoldierSpawnEvent != null)
         {
             SoldierSpawnEvent.Invoke();
         }

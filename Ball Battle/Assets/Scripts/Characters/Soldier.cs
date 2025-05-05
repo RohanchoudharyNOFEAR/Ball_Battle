@@ -7,26 +7,27 @@ public abstract class Soldier : MonoBehaviour
 {
     protected ISoldierState currentState;
 
-    public ISoldierState GetCurrentState {  get { return currentState; } }
-    public float spawnDelay = 0.5f;
-    public float reactivateTime = 2.5f;
-    public Renderer rend;
-    public Color originalColor;
-    public Color inactiveColor = Color.gray;
 
+    [SerializeField] private float spawnDelay = 0.5f;
+    // [SerializeField] private float reactivateTime = 2.5f;
+
+    public ISoldierState GetCurrentState { get { return currentState; } }
     public GameObject reactivateEffect;
     public GameObject activationEffect;
-    public Transform arrowTransform;
     public Animator anim;
     public CapsuleCollider collider;
 
+    [SerializeField] protected Renderer rend;
+    [SerializeField] protected Color inactiveColor = Color.gray;
+    protected Color originalColor;  
     protected GameManager gameManager;
+
     public virtual void Start()
     {
-     //   rend = GetComponentInChildren<Renderer>();
+        //   rend = GetComponentInChildren<Renderer>();
         originalColor = rend.material.color;
 
-        
+
         collider = GetComponent<CapsuleCollider>();
         anim = GetComponent<Animator>();
         TransitionToState(new InactiveState(spawnDelay));
@@ -38,8 +39,7 @@ public abstract class Soldier : MonoBehaviour
     {
         currentState?.Update(this);
 
-        if (arrowTransform)
-            arrowTransform.forward = transform.forward;
+
     }
 
     public void TransitionToState(ISoldierState newState)
