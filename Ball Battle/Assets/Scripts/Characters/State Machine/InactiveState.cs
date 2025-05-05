@@ -17,6 +17,7 @@ public class InactiveState : ISoldierState
         soldier.SetColor(false);
         soldier.anim?.SetBool("Run",false);
         timer = delay;
+        soldier.collider.isTrigger = true;
     }
 
     public void Update(Soldier soldier)
@@ -31,5 +32,6 @@ public class InactiveState : ISoldierState
     public void Exit(Soldier soldier)
     {
         soldier.PlayEffect(soldier.reactivateEffect);
+        soldier.collider.isTrigger = false;
     }
 }

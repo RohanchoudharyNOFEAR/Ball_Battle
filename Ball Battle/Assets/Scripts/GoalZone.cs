@@ -6,7 +6,19 @@ public class GoalZone : MonoBehaviour
 {
     public bool isEnemyGoal; // true = enemy gate = player wins if reached
     public GameObject ParticleEffect;
-  
+    public Color GoalColour;
+    public Renderer Renderer;
+
+    private void Awake()
+    {
+        Renderer = GetComponent<Renderer>();
+      
+    }
+    private void Start()
+    {
+        
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Attacker"))

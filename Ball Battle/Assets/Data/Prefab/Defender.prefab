@@ -258,7 +258,7 @@ MonoBehaviour:
   activationEffect: {fileID: 0}
   arrowTransform: {fileID: 0}
   anim: {fileID: 5415977581278774914}
-  detectionRange: 5
+  detectionRange: 15
   chaseSpeed: 1
   returnSpeed: 2
   startPos: {x: 0, y: 0, z: 0}
@@ -650,17 +650,17 @@ PrefabInstance:
     - target: {fileID: 4992561807654457176, guid: 3555e6ed211aa2249a0451ac5d871bba,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4992561807654457176, guid: 3555e6ed211aa2249a0451ac5d871bba,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4992561807654457176, guid: 3555e6ed211aa2249a0451ac5d871bba,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4992561807654457176, guid: 3555e6ed211aa2249a0451ac5d871bba,
         type: 3}

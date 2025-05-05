@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,7 +32,11 @@ public class GameManager : MonoBehaviour
     private bool gamemanagerinitlized = false;
     public ARRaycastManager raycastManager;
     public ARPlaneManager planeManager;
-   // public Inputaction controls;
+
+    public Action PlayerLoseEvent;
+    public Action PlayerWinEvent;
+
+    // public Inputaction controls;
     private void Awake()
     {
         if (Instance == null)
@@ -93,11 +98,19 @@ public class GameManager : MonoBehaviour
                 }
                 if (PlayerWins > EnemyWins)
                 {
-                    resultScreen.ShowResult("You WINN!");
+                if (PlayerWinEvent != null)
+                {
+                    PlayerWinEvent.Invoke();
+                }
+                resultScreen.ShowResult("You WINN!");
                     resultScreen.ShowButtons(true);
                 }
                 else if (PlayerWins < EnemyWins)
                 {
+                if (PlayerLoseEvent != null)
+                {
+                    PlayerLoseEvent.Invoke();
+                }
                     resultScreen.ShowResult("Enemey WINN!");
                     resultScreen.ShowButtons(true);
                 }
@@ -119,10 +132,18 @@ public class GameManager : MonoBehaviour
         if (playerScored)
         {
             PlayerWins++;
+            if (PlayerWinEvent != null)
+            {
+                PlayerWinEvent.Invoke();
+            }
         }
         else
         {
             EnemyWins++;
+            if (PlayerLoseEvent != null)
+            {
+                PlayerLoseEvent.Invoke();
+            }
         }
         Debug.Log(playerScored ? "PLAYER SCORED!" : "ENEMY SCORED!");
        StartCoroutine( EndMatch()); // Or handle win tracking

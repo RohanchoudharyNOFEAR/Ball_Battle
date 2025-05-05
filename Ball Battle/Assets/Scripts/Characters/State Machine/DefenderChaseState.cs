@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class DefenderChaseState : ISoldierState
 {
     private Attacker target;
-
+    public static Action CaughtAttackerEvent;
     public DefenderChaseState(Attacker target)
     {
         this.target = target;
@@ -23,10 +24,15 @@ public class DefenderChaseState : ISoldierState
         var d = s as Defender;
         Vector3 dir = (target.transform.position - d.transform.position).normalized;
         d.transform.position += dir * d.chaseSpeed * Time.deltaTime;
+        d.transform.LookAt(target.transform.position);
         if (Vector3.Distance(d.transform.position, target.transform.position) < 3.5f)
         {
-            d.transform.LookAt(target.transform.position);
+          //  d.transform.LookAt(target.transform.position);
             s.anim?.SetTrigger("Touch");
+            if (CaughtAttackerEvent != null)
+            {
+                CaughtAttackerEvent.Invoke();
+            }
             target.PassBallTo();
             d.TransitionToState(new DefenderReturnState());
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,8 @@ public class SoldierSpawner : MonoBehaviour
     public EnergySystem energySystem;
 
     public Inputaction controls;
+
+    public static Action SoldierSpawnEvent;
 
    [SerializeField] private bool tapped = false;
     private bool canSpawn = true;
@@ -100,6 +103,10 @@ public class SoldierSpawner : MonoBehaviour
     {
         Vector3 adjustedPosition = new Vector3(spawnPosition.x, spawnYPos, spawnPosition.z); // adjust height as needed
         Instantiate(prefab, adjustedPosition, Quaternion.identity);
+        if(SoldierSpawnEvent!=null)
+        {
+            SoldierSpawnEvent.Invoke();
+        }
         StartCoroutine(resetCanSpawn());
     }
 

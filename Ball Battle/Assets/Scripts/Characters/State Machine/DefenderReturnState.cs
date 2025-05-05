@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class DefenderReturnState : ISoldierState
 {
@@ -14,7 +15,7 @@ public class DefenderReturnState : ISoldierState
     {
         var d = s as Defender;
         d.transform.position = Vector3.MoveTowards(d.transform.position, d.startPos, d.returnSpeed * Time.deltaTime);
-
+        d.transform.LookAt(d.startPos);
         if (Vector3.Distance(d.transform.position, d.startPos) < 0.1f)
         {
             if (GameManager.Instance.isRushTime)

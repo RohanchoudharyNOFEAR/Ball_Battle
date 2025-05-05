@@ -47,8 +47,10 @@ public class AudioManager : MonoBehaviour
     public Transform AudioSourceDefaultParent;
 
     [Header("Audios")]
-    public AudioConfiguration WeaponShotFiredAudio;
-    public AudioConfiguration EnemeyHitAudio;
+    public AudioConfiguration SoldierSpawnAudio;
+    public AudioConfiguration AttackerCaughtAudio;
+    public AudioConfiguration PlayerLoseAudio;
+    public AudioConfiguration PlayerWinAudio;
 
     private readonly Stack<AudioSource> _freeAudioSources = new Stack<AudioSource>();
     private List<AudioSource> _audioSourcesInUse = new List<AudioSource>();
@@ -88,6 +90,11 @@ public class AudioManager : MonoBehaviour
         RegisterCallbacks();
     }
 
+    private void OnDisable()
+    {
+        UnRegisterCallbacks();
+    }
+
     private void Update()
     {
         for (var i = _audioSourcesInUse.Count - 1; i >= 0; i--)
@@ -106,7 +113,26 @@ public class AudioManager : MonoBehaviour
 
     private void RegisterCallbacks()
     {
-       
+        if (GameManager.Instance != null)
+        {
+            SoldierSpawner.SoldierSpawnEvent += OnSholdierSpawn;
+            DefenderChaseState.CaughtAttackerEvent += OnAttackerCaught;
+
+            GameManager.Instance.PlayerLoseEvent += OnPlayerLose;
+            GameManager.Instance.PlayerWinEvent += OnPlayerWin;
+        }
+    }
+
+    private void UnRegisterCallbacks()
+    {
+        if (GameManager.Instance != null)
+        {
+            SoldierSpawner.SoldierSpawnEvent -= OnSholdierSpawn;
+            DefenderChaseState.CaughtAttackerEvent -= OnAttackerCaught;
+
+            GameManager.Instance.PlayerLoseEvent -= OnPlayerLose;
+            GameManager.Instance.PlayerWinEvent -= OnPlayerWin;
+        }
     }
 
     AudioSource GetAvailableAudioSource()
@@ -137,13 +163,22 @@ public class AudioManager : MonoBehaviour
         source.Play();
     }
 
-    private void OnShotsFired()
+    private void OnSholdierSpawn()
     {
-        PlayAudioClip(WeaponShotFiredAudio);
+        PlayAudioClip(SoldierSpawnAudio);
     }
 
-    private void OnCharacterHit()
+    private void OnAttackerCaught()
     {
-        PlayAudioClip(EnemeyHitAudio);
+        PlayAudioClip(AttackerCaughtAudio);
+    }
+
+    private void OnPlayerLose()
+    {
+        PlayAudioClip(PlayerLoseAudio);
+    }
+    private void OnPlayerWin()
+    {
+        PlayAudioClip(PlayerWinAudio);
     }
 }

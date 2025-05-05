@@ -41,7 +41,7 @@ public class BallManager : MonoBehaviour
         Renderer r = field.GetComponent<Renderer>();
         Vector3 center = r.bounds.center;
         Vector3 size = r.bounds.size;
-
+       
         return new Vector3(
             Random.Range(center.x - size.x / 2, center.x + size.x / 2),
             SpawnYPos,

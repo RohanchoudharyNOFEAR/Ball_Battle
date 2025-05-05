@@ -18,6 +18,7 @@ public abstract class Soldier : MonoBehaviour
     public GameObject activationEffect;
     public Transform arrowTransform;
     public Animator anim;
+    public CapsuleCollider collider;
 
     protected GameManager gameManager;
     public virtual void Start()
@@ -26,7 +27,7 @@ public abstract class Soldier : MonoBehaviour
         originalColor = rend.material.color;
 
         
-       
+        collider = GetComponent<CapsuleCollider>();
         anim = GetComponent<Animator>();
         TransitionToState(new InactiveState(spawnDelay));
 
