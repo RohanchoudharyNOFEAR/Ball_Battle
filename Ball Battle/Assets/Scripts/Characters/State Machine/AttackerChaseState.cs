@@ -19,7 +19,7 @@ public class AttackerChaseState : ISoldierState
             s.anim?.SetBool("Run", false);
             s.anim?.SetBool("Dribble", true);
            // s.anim?.SetBool("Run", false);
-            float moveSpeed =  GameManager.Instance.isRushTime ? a.GetChaseSpeed : a.GetCarrySpeed;
+            float moveSpeed =  GameManager.Instance.IsRushTime ? a.GetChaseSpeed : a.GetCarrySpeed;
             if (a.GetEnemyGate != null)
             {
                 Vector3 dirToGate = (a.GetEnemyGate.position - a.transform.position).normalized;

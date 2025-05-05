@@ -10,29 +10,28 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public enum Turn { PlayerAttack, PlayerDefense }
-    public Turn currentTurn;
-    public float matchDuration = 140f;
-
+   
+    [SerializeField] private float matchDuration = 140f;
     [SerializeField] private int matchCount = 0;
+    [SerializeField] private int PlayerWins = 0;
+    [SerializeField] private int EnemyWins = 0;
+    [SerializeField] private SoldierSpawner soldierSpawner;
+    [SerializeField] private BallManager ballManager;
+    [SerializeField] private ResultScreen resultScreen;
+
     private float matchTimer;
-  [SerializeField]  private int PlayerWins = 0;
-  [SerializeField]  private int EnemyWins = 0;
+    private bool isRushTime = false;
+    private bool playerScored = false;
+    private bool gamemanagerinitlized = false;
 
-    public SoldierSpawner soldierSpawner;
-    public BallManager ballManager;
-    
-    public bool isRushTime = false;
-    public ResultScreen resultScreen;
-
+    public bool IsRushTime => isRushTime;
     public float GetRemainingTime() => matchTimer;
     public string GetCurrentTurnText() => currentTurn == Turn.PlayerAttack ? "Attacking" : "Defending";
 
-    private bool playerScored = false;
-    private bool gamemanagerinitlized = false;
+    public enum Turn { PlayerAttack, PlayerDefense }
+    public Turn currentTurn;
     public ARRaycastManager raycastManager;
     public ARPlaneManager planeManager;
-
     public Action PlayerLoseEvent;
     public Action PlayerWinEvent;
 
@@ -47,7 +46,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(Instance);
         }
-       
+
     }
 
     // Start is called before the first frame update
@@ -66,64 +65,64 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-        else if(InitializationManager.instance.initialized == true && gamemanagerinitlized == false)
+        else if (InitializationManager.instance.initialized == true && gamemanagerinitlized == false)
         {
             StartNewMatch(Turn.PlayerAttack);
             gamemanagerinitlized = true;
         }
-            
 
 
-          
-            matchTimer -= Time.deltaTime;
 
 
-            if (!isRushTime && matchTimer <= 15f)
+        matchTimer -= Time.deltaTime;
+
+
+        if (!IsRushTime && matchTimer <= 15f)
+        {
+            isRushTime = true;
+            Debug.Log("Rush Time Started!");
+            OnRushTimeStarted();
+        }
+
+        if (matchTimer <= 0f)
+        {
+            StartCoroutine(EndMatch());
+        }
+
+        if (matchCount > 5)
+        {
+            if (resultScreen.gameObject.activeInHierarchy == false)
             {
-                isRushTime = true;
-                Debug.Log("Rush Time Started!");
-                OnRushTimeStarted();
+                resultScreen.gameObject.SetActive(true);
             }
-
-            if (matchTimer <= 0f)
+            if (PlayerWins > EnemyWins)
             {
-                StartCoroutine(EndMatch());
-            }
-
-            if (matchCount > 5)
-            {
-                if (resultScreen.gameObject.activeInHierarchy == false)
-                {
-                    resultScreen.gameObject.SetActive(true);
-                }
-                if (PlayerWins > EnemyWins)
-                {
                 if (PlayerWinEvent != null)
                 {
                     PlayerWinEvent.Invoke();
                 }
                 resultScreen.ShowResult("You WINN!");
-                    resultScreen.ShowButtons(true);
-                }
-                else if (PlayerWins < EnemyWins)
-                {
+                resultScreen.ShowButtons(true);
+            }
+            else if (PlayerWins < EnemyWins)
+            {
                 if (PlayerLoseEvent != null)
                 {
                     PlayerLoseEvent.Invoke();
                 }
-                    resultScreen.ShowResult("Enemey WINN!");
-                    resultScreen.ShowButtons(true);
-                }
-                else
-                {
-                    resultScreen.ShowResult("Draw!");
-                    SceneManager.LoadScene("PenaltyGameScene"); // Name of your game scene
-
-                }
-
-                StopCoroutine(EndMatch());
+                resultScreen.ShowResult("Enemey WINN!");
+                resultScreen.ShowButtons(true);
             }
-        
+            else
+            {
+                resultScreen.ShowResult("Draw!");
+                SceneManager.LoadScene("PenaltyGameScene"); // Name of your game scene
+
+            }
+
+            StopCoroutine(EndMatch());
+        }
+
     }
 
     public void OnGoalScored(bool playerScored)
@@ -146,7 +145,7 @@ public class GameManager : MonoBehaviour
             }
         }
         Debug.Log(playerScored ? "PLAYER SCORED!" : "ENEMY SCORED!");
-       StartCoroutine( EndMatch()); // Or handle win tracking
+        StartCoroutine(EndMatch()); // Or handle win tracking
     }
 
     void StartNewMatch(Turn turn)
@@ -192,17 +191,17 @@ public class GameManager : MonoBehaviour
 
             // You can add win/loss condition checks here
             Turn nextTurn = currentTurn == Turn.PlayerAttack ? Turn.PlayerDefense : Turn.PlayerAttack;
-           
-                ResetMatch();
-                StartNewMatch(nextTurn);
-            
+
+            ResetMatch();
+            StartNewMatch(nextTurn);
+
         }
     }
 
     private void ResetMatch()
     {
         Destroy(ballManager.GetBall());
-       
+
         Soldier[] soldiers = GameObject.FindObjectsOfType<Soldier>();
         foreach (Soldier s in soldiers)
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class FenceZone : MonoBehaviour
 {
     public bool isEnemyGoal; // true = enemy gate = player wins if reached
-    public GameObject ParticleEffect;
+   [SerializeField] private GameObject ParticleEffect;
 
     private void OnTriggerEnter(Collider other)
     {

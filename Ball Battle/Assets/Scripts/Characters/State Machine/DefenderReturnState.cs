@@ -18,7 +18,7 @@ public class DefenderReturnState : ISoldierState
         d.transform.LookAt(d.StartPos);
         if (Vector3.Distance(d.transform.position, d.StartPos) < 0.1f)
         {
-            if (GameManager.Instance.isRushTime)
+            if (GameManager.Instance.IsRushTime)
                 d.TransitionToState(new DefenderIdleState());
             else
                 d.TransitionToState(new InactiveState(4f));
