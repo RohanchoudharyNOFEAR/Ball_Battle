@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Atacker_Maze : MonoBehaviour
 {
-
-    Animator Animator;
-
     public bool HasBall = false;
 
     private Inputaction controls;
     private Vector2 moveInput;
+    private Animator animator;
 
     private void Awake()
     {
@@ -20,7 +18,7 @@ public class Atacker_Maze : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     void OnEnable()
@@ -47,11 +45,11 @@ public class Atacker_Maze : MonoBehaviour
     {
         if (moveInput != Vector2.zero)
         {
-            Animator.SetBool("Run", true);
+            animator.SetBool("Run", true);
         }
         else
         {
-            Animator.SetBool("Run", false);
+            animator.SetBool("Run", false);
         }
 
         transform.Translate(new Vector3(moveInput.x, 0, moveInput.y) * 5 * Time.deltaTime);
