@@ -134,20 +134,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnDelay: 0.5
-  reactivateTime: 2.5
-  rend: {fileID: 5573777204188742249}
-  originalColor: {r: 0, g: 0, b: 0, a: 0}
-  inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   reactivateEffect: {fileID: 0}
   activationEffect: {fileID: 0}
-  arrowTransform: {fileID: 0}
   anim: {fileID: 0}
+  collider: {fileID: 0}
+  rend: {fileID: 5573777204188742249}
+  inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   ball: {fileID: 0}
   enemyGate: {fileID: 0}
-  hasBall: 0
+  highlight: {fileID: 4252528052128710772}
   chaseSpeed: 1.5
   carrySpeed: 0.75
-  highlight: {fileID: 4252528052128710772}
+  hasBall: 0
 --- !u!95 &1794775737334392444
 Animator:
   serializedVersion: 5
@@ -200,8 +198,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2781295566053052550}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 1000
+  m_Drag: 1000
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}

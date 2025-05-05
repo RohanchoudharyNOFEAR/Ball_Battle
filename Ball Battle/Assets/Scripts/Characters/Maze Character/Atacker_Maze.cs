@@ -51,8 +51,15 @@ public class Atacker_Maze : MonoBehaviour
         {
             animator.SetBool("Run", false);
         }
-
-        transform.Translate(new Vector3(moveInput.x, 0, moveInput.y) * 5 * Time.deltaTime);
+       
+        Vector3 dir = new Vector3(moveInput.x, 0, moveInput.y);
+        if (dir.sqrMagnitude > 0.001f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+        }
+        transform.Translate(dir * 5 * Time.deltaTime, Space.World);
+        
     }
 
     private void OnTriggerEnter(Collider other)

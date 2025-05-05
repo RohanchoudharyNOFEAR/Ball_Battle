@@ -18,7 +18,6 @@ public class AttackerChaseState : ISoldierState
         {
             s.anim?.SetBool("Run", false);
             s.anim?.SetBool("Dribble", true);
-           // s.anim?.SetBool("Run", false);
             float moveSpeed =  GameManager.Instance.IsRushTime ? a.GetChaseSpeed : a.GetCarrySpeed;
             if (a.GetEnemyGate != null)
             {

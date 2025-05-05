@@ -2822,6 +2822,7 @@ MonoBehaviour:
   highlight: {fileID: 5968082643285256258}
   chaseSpeed: 0.08
   carrySpeed: 0.04
+  hasBall: 0
 --- !u!95 &5102532745546434842
 Animator:
   serializedVersion: 5
@@ -2874,8 +2875,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6498829281321801381}
   serializedVersion: 4
-  m_Mass: 0.0000001
-  m_Drag: 0
+  m_Mass: 10000
+  m_Drag: 1000
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
