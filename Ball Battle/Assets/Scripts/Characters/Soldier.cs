@@ -60,5 +60,10 @@ public abstract class Soldier : MonoBehaviour
             Instantiate(effectPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
     }
 
+    public void OnDestroy()
+    {
+        GameManager.Instance.currentSoldierCount--;
+    }
+
     public abstract ISoldierState GetInitialActiveState();
 }

@@ -22,10 +22,13 @@ public class DefenderChaseState : ISoldierState
     public void Update(Soldier s)
     {
         var d = s as Defender;
+        if (target == null) { d.TransitionToState(new DefenderReturnState()); return; }
+
+
         Vector3 dir = (target.transform.position - d.transform.position).normalized;
         d.transform.position += dir * d.ChaseSpeed * Time.deltaTime;
         d.transform.LookAt(target.transform.position);
-        float attackercatchthreeshold = d.transform.name == "Defender_AR(Clone)" ? 0.0495f : 3.5f;
+        float attackercatchthreeshold = d.transform.name == "Defender_AR(Clone)" ? 0.0519f : 3.5f;
         if (Vector3.Distance(d.transform.position, target.transform.position) < attackercatchthreeshold)
         {
             if (target.GetComponent<Attacker>().HasBall)

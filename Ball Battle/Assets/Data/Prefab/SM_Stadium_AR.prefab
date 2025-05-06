@@ -134,10 +134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemyGoal: 1
-  ParticleEffect: {fileID: 8771702518043509366, guid: 363e28624da9f7e47a10cf1530b83692,
+  goalColour: {r: 0, g: 0, b: 0, a: 0}
+  renderer: {fileID: 0}
+  ParticleEffect: {fileID: 4062496106243499295, guid: 304da8401b8ea6849b9f5f96f0f6eb57,
     type: 3}
-  GoalColour: {r: 0, g: 0, b: 0, a: 0}
-  Renderer: {fileID: 0}
 --- !u!65 &4190628115937158434
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -492,10 +492,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemyGoal: 0
-  ParticleEffect: {fileID: 8771702518043509366, guid: 363e28624da9f7e47a10cf1530b83692,
+  goalColour: {r: 0, g: 0, b: 0, a: 0}
+  renderer: {fileID: 0}
+  ParticleEffect: {fileID: 4062496106243499295, guid: 304da8401b8ea6849b9f5f96f0f6eb57,
     type: 3}
-  GoalColour: {r: 0, g: 0, b: 0, a: 0}
-  Renderer: {fileID: 0}
 --- !u!65 &5924030287252036536
 BoxCollider:
   m_ObjectHideFlags: 0

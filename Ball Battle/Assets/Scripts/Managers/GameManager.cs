@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int matchCount = 0;
     [SerializeField] private int PlayerWins = 0;
     [SerializeField] private int EnemyWins = 0;
+    [SerializeField] private int maxSoilderSpawn = 10;
 
     [Header("Match Session Components")]
     [SerializeField] private SoldierSpawner soldierSpawner;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
     private bool gamemanagerinitlized = false;
     [SerializeField] private List<GameObject> activeSoldiers;
     public bool IsRushTime => isRushTime;
+    public int MaxSoldierSpawn => maxSoilderSpawn;
     public float GetRemainingTime() => matchTimer;
     public string GetCurrentTurnText() => currentTurn == Turn.PlayerAttack ? "Attacking" : "Defending";
 
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
     public enum Turn { PlayerAttack, PlayerDefense }
     [Header("Game Manager Specific")]
     public Turn currentTurn;
+    [HideInInspector] public int currentSoldierCount = 0;
     [Header("AR Specific Component")]
     public ARRaycastManager raycastManager;
     public ARPlaneManager planeManager;
@@ -87,12 +90,12 @@ public class GameManager : MonoBehaviour
             StartNewMatch(Turn.PlayerAttack);
             gamemanagerinitlized = true;
         }
-     
+
         HandleMatchTimer();
         Handle5MatchSessionEnd();
     }
 
-   
+
     void HandleMatchTimer()
     {
         matchTimer -= Time.deltaTime;

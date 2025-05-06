@@ -14,6 +14,7 @@ public class SoldierSpawner : MonoBehaviour
     [SerializeField] private LayerMask landFieldLayer;
     [SerializeField] private float rayLength = 100f;
     [SerializeField] private float spawnYPos = 1.5f;
+   
     [Header("Components")]
     [SerializeField] private EnergySystem energySystem;
 
@@ -21,7 +22,7 @@ public class SoldierSpawner : MonoBehaviour
     private Inputaction controls;
     private bool canSpawn = true;
     private bool tapped = false;
-
+    
     public enum TurnType { Attacker, Defender }
     public TurnType currentTurn;
     public static Action<GameObject> SoldierSpawnEvent;
@@ -60,55 +61,59 @@ public class SoldierSpawner : MonoBehaviour
 
     void HandleTap()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Pointer.current.position.ReadValue());
-
-
-        if (Physics.Raycast(ray, out RaycastHit hit, rayLength, landFieldLayer))
+        if (GameManager.Instance.currentSoldierCount < GameManager.Instance.MaxSoldierSpawn)
         {
-            string tag = hit.collider.tag;
+            Ray ray = Camera.main.ScreenPointToRay(Pointer.current.position.ReadValue());
 
-            if (currentTurn == TurnType.Attacker && tag == "PlayerField")
+
+            if (Physics.Raycast(ray, out RaycastHit hit, rayLength, landFieldLayer))
             {
-                if (energySystem.TryUseEnergy(2))
+                string tag = hit.collider.tag;
+
+                if (currentTurn == TurnType.Attacker && tag == "PlayerField")
                 {
-                    SpawnSoldier(attackerPrefab, hit.point);
+                    if (energySystem.TryUseEnergy(2))
+                    {
+                        SpawnSoldier(attackerPrefab, hit.point);
+                    }
                 }
-            }
-            else if (currentTurn == TurnType.Defender && tag == "PlayerField")
-            {
-                if (energySystem.TryUseEnergy(3))
+                else if (currentTurn == TurnType.Defender && tag == "PlayerField")
                 {
-                    SpawnSoldier(defenderPrefab, hit.point);
+                    if (energySystem.TryUseEnergy(3))
+                    {
+                        SpawnSoldier(defenderPrefab, hit.point);
+                    }
                 }
-            }
-            else if (currentTurn == TurnType.Attacker && tag == "EnemyField")
-            {
-                if (energySystem.TryUseEnemyEnergy(3))
+                else if (currentTurn == TurnType.Attacker && tag == "EnemyField")
                 {
-                    SpawnSoldier(defenderPrefab, hit.point);
+                    if (energySystem.TryUseEnemyEnergy(3))
+                    {
+                        SpawnSoldier(defenderPrefab, hit.point);
+                    }
                 }
-            }
-            else if (currentTurn == TurnType.Defender && tag == "EnemyField")
-            {
-                if (energySystem.TryUseEnemyEnergy(2))
+                else if (currentTurn == TurnType.Defender && tag == "EnemyField")
                 {
-                    SpawnSoldier(attackerPrefab, hit.point);
+                    if (energySystem.TryUseEnemyEnergy(2))
+                    {
+                        SpawnSoldier(attackerPrefab, hit.point);
+                    }
                 }
             }
         }
     }
 
-
-
     void SpawnSoldier(GameObject prefab, Vector3 spawnPosition)
     {
-        Vector3 adjustedPosition = new Vector3(spawnPosition.x, spawnYPos, spawnPosition.z); // adjust height as needed
-        GameObject soldier = Instantiate(prefab, adjustedPosition, Quaternion.identity);
-        if (SoldierSpawnEvent != null)
-        {
-            SoldierSpawnEvent.Invoke(soldier);
-        }
-        StartCoroutine(resetCanSpawn());
+       
+            Vector3 adjustedPosition = new Vector3(spawnPosition.x, spawnYPos, spawnPosition.z); // adjust height as needed
+            GameObject soldier = Instantiate(prefab, adjustedPosition, Quaternion.identity);
+            GameManager.Instance.currentSoldierCount++;
+            if (SoldierSpawnEvent != null)
+            {
+                SoldierSpawnEvent.Invoke(soldier);
+            }
+            StartCoroutine(resetCanSpawn());
+        
     }
 
     public void SetTurn(TurnType newTurn)

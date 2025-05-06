@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class InGameUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text timerText;
+    [SerializeField] private TMP_Text soldierCountText;
     [SerializeField] private Slider PlayerEnergyBar;
     [SerializeField] private Slider EnemyEnergyBar;
     [SerializeField] private TMP_Text turnText;
@@ -27,6 +28,7 @@ public class InGameUI : MonoBehaviour
         {
             timerText.text = Mathf.CeilToInt(gm.GetRemainingTime()).ToString();
             turnText.text = gm.GetCurrentTurnText();
+            soldierCountText.text = gm.currentSoldierCount.ToString() + "/" + gm.MaxSoldierSpawn; //should have use string builder but due to time constriant
         }
 
         PlayerEnergyBar.value = es.GetPlayerNormalizedEnergy();
