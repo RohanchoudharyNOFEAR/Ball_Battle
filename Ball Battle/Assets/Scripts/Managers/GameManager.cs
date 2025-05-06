@@ -123,19 +123,13 @@ public class GameManager : MonoBehaviour
             }
             if (playerWins > enemyWins)
             {
-                if (PlayerWinEvent != null)
-                {
-                    PlayerWinEvent.Invoke();
-                }
+               
                 resultScreen.ShowResult("You WINN!",false);
                 resultScreen.ShowButtons(true);
             }
             else if (playerWins < enemyWins)
             {
-                if (PlayerLoseEvent != null)
-                {
-                    PlayerLoseEvent.Invoke();
-                }
+               
                 resultScreen.ShowResult("Enemey WINN!",false);
                 resultScreen.ShowButtons(true);
             }

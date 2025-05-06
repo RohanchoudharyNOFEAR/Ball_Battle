@@ -39,6 +39,7 @@ public class ResultScreen : MonoBehaviour
         if (show)
         {
             playerScoreText.gameObject.SetActive(false);
+            enemyScoreText.gameObject.SetActive(false);
             RestartButton.SetActive(true);
             MainMenuButton.SetActive(true);
         }
