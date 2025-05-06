@@ -4,27 +4,34 @@ using UnityEngine;
 
 public class GameManager_Maze : MonoBehaviour
 {
-    [SerializeField]
-    private int timer = 50;
-    public int GetTimer {  get { return timer; } }
-   [SerializeField] private ResultScreen rs;
+
+    public int GetTimer { get { return timer; } }
+
+    [SerializeField] private ResultScreen rs;
+    [SerializeField] private int timer = 50;
+
+    private Coroutine timerCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(updateTimer());
+        timerCoroutine = StartCoroutine(updateTimer());
         //rs = GameObject.FindAnyObjectByType<ResultScreen>();
     }
 
     // Update is called once per frame
-   
+
 
     public void PlayerWin()
     {
         if (timer > 0)
         {
+            if (timerCoroutine != null)
+            {
+                StopCoroutine(timerCoroutine); 
+            }
             rs.gameObject.SetActive(true);
-            rs.ShowResult("YOU WIN");
+            rs.ShowResult("YOU WIN", false);
 
         }
     }
@@ -33,9 +40,12 @@ public class GameManager_Maze : MonoBehaviour
     {
         if (timer <= 0)
         {
-            StopCoroutine(updateTimer());
+            if (timerCoroutine != null)
+            {
+                StopCoroutine(timerCoroutine);
+            }
             rs.gameObject.SetActive(true);
-            rs.ShowResult("YOU LOSE");
+            rs.ShowResult("YOU LOSE", false);
         }
     }
 
@@ -46,8 +56,9 @@ public class GameManager_Maze : MonoBehaviour
             yield return new WaitForSeconds(1);
 
             timer--;
-            PlayerLose();
+           
         }
+        PlayerLose();
     }
 
 }

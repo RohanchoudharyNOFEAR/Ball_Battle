@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
     [Header("Match Session Variables")]
     [SerializeField] private float matchDuration = 140f;
     [SerializeField] private int matchCount = 0;
-    [SerializeField] private int PlayerWins = 0;
-    [SerializeField] private int EnemyWins = 0;
+    [SerializeField] private int playerWins = 0;
+    [SerializeField] private int enemyWins = 0;
     [SerializeField] private int maxSoilderSpawn = 10;
 
     [Header("Match Session Components")]
@@ -34,7 +34,8 @@ public class GameManager : MonoBehaviour
     public int MaxSoldierSpawn => maxSoilderSpawn;
     public float GetRemainingTime() => matchTimer;
     public string GetCurrentTurnText() => currentTurn == Turn.PlayerAttack ? "Attacking" : "Defending";
-
+    public int GetPlayerWins() => playerWins;
+    public int GetEnemyWins()=> enemyWins;
 
     public enum Turn { PlayerAttack, PlayerDefense }
     [Header("Game Manager Specific")]
@@ -120,22 +121,22 @@ public class GameManager : MonoBehaviour
             {
                 resultScreen.gameObject.SetActive(true);
             }
-            if (PlayerWins > EnemyWins)
+            if (playerWins > enemyWins)
             {
                 if (PlayerWinEvent != null)
                 {
                     PlayerWinEvent.Invoke();
                 }
-                resultScreen.ShowResult("You WINN!");
+                resultScreen.ShowResult("You WINN!",false);
                 resultScreen.ShowButtons(true);
             }
-            else if (PlayerWins < EnemyWins)
+            else if (playerWins < enemyWins)
             {
                 if (PlayerLoseEvent != null)
                 {
                     PlayerLoseEvent.Invoke();
                 }
-                resultScreen.ShowResult("Enemey WINN!");
+                resultScreen.ShowResult("Enemey WINN!",false);
                 resultScreen.ShowButtons(true);
             }
             else
@@ -170,7 +171,7 @@ public class GameManager : MonoBehaviour
         this.playerScored = playerScored;
         if (playerScored)
         {
-            PlayerWins++;
+            playerWins++;
             if (PlayerWinEvent != null)
             {
                 PlayerWinEvent.Invoke();
@@ -178,7 +179,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            EnemyWins++;
+            enemyWins++;
             if (PlayerLoseEvent != null)
             {
                 PlayerLoseEvent.Invoke();
